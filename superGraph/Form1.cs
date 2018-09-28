@@ -10,6 +10,7 @@ namespace superGraph
 {
     delegate void LabelUpdaterDelegate(Label lbl, string lblText);            /////
     delegate void ProgressBarUpdaterDelegate(int progressPrcnt);              /////
+    delegate void PictureBoxUpdaterDelegate(PictureBox pctrbox, Color color); /////
 
 
     public partial class Form1 : Form
@@ -24,7 +25,7 @@ namespace superGraph
 
         List<double> sinusoida = new List<double>();
 
-        const int buferIncomingSize = 60000; //32008;                      // РАЗМЕР ВХОДНОГО БУФЕРА COM ПОРТА 
+        const int buferIncomingSize = 4000; //32008;                      // РАЗМЕР ВХОДНОГО БУФЕРА COM ПОРТА 
 
         ////////////
 
@@ -57,56 +58,94 @@ namespace superGraph
 
         private void btnLoadTextFile_Click(object sender, EventArgs e)
         {
-
             if (dataChart.Series.Contains(dataChart.Series.FindByName(txtBoxGraphName.Text)))
             {
                 MessageBox.Show("График с таким названием уже существует!", "Ошибка");
             }
             else
             {
-                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                if (checkBoxSelectFileData.Checked)
                 {
-                    currentGraphY.Clear();
-                    dataChart.Series.Add(txtBoxGraphName.Text);
-                    dataChart.Series[txtBoxGraphName.Text].ChartType = System.Windows.Forms.DataVisualization.
-                                                                                         Charting.SeriesChartType.Line;
-                    dataChart.Series[txtBoxGraphName.Text].Legend = "Legend1";
-                    dataChart.Series[txtBoxGraphName.Text].LegendText = txtBoxGraphName.Text;
-                    dataChart.Series[txtBoxGraphName.Text].ChartArea = "ChartArea" + cmbChartAreaChoice.Text;
 
-                    GetSeries();
-
-                    StreamReader streamReader = new StreamReader(openFileDialog1.FileName);
-
-                    double x = 0.0;
-
-                    while (!streamReader.EndOfStream)
+                    if (openFileDialog1.ShowDialog() == DialogResult.OK)
                     {
-                        double y = Convert.ToDouble(streamReader.ReadLine());
-                        if (chkbxIsGraphNormalized.Checked)
+                        currentGraphY.Clear();
+                        dataChart.Series.Add(txtBoxGraphName.Text);
+                        dataChart.Series[txtBoxGraphName.Text].ChartType = System.Windows.Forms.DataVisualization.
+                                                                                             Charting.SeriesChartType.Line;
+                        dataChart.Series[txtBoxGraphName.Text].Legend = "Legend1";
+                        dataChart.Series[txtBoxGraphName.Text].LegendText = txtBoxGraphName.Text;
+                        dataChart.Series[txtBoxGraphName.Text].ChartArea = "ChartArea" + cmbChartAreaChoice.Text;
+
+                        GetSeries();
+
+                        StreamReader streamReader = new StreamReader(openFileDialog1.FileName);
+
+                        double x = 0.0;
+
+                        while (!streamReader.EndOfStream)
                         {
-                            y = (double)(y * amplVoltage / maxADC);
+                            double y = Convert.ToDouble(streamReader.ReadLine());
+                            if (chkbxIsGraphNormalized.Checked)
+                            {
+                                y = (double)(y * amplVoltage / maxADC);
+                            }
+                            currentGraphY.Add(y);
+                            dataChart.Series[txtBoxGraphName.Text].Points.AddXY(x, Math.Round(y, 4));
+                            x += 1 / sampleRate;
                         }
-                        currentGraphY.Add(y);
-                        dataChart.Series[txtBoxGraphName.Text].Points.AddXY(x, Math.Round(y, 4));
-                        x += 1 / sampleRate;
+                        streamReader.Close();
+                        yMax = Math.Ceiling(currentGraphY.Max());
+                        yMin = Math.Floor(currentGraphY.Min());
+                        FormatGraph(yMax, yMin, 1 / sampleRate, "ChartArea" + cmbChartAreaChoice.Text);
                     }
-                    streamReader.Close();
-                    yMax = Math.Ceiling(currentGraphY.Max());
-                    yMin = Math.Floor(currentGraphY.Min());
-                    GraphFormatting(yMax, yMin, 1 / sampleRate, "ChartArea" + cmbChartAreaChoice.Text);
+
+                }
+                else if (checkBoxSelectBufferData.Checked)
+                {
+                    if (buferU16.Count == 0)
+                    {
+                        MessageBox.Show("Буфер пуст!", "Ошибка");
+                    }
+                    else
+                    {
+                        currentGraphY.Clear();
+                        dataChart.Series.Add(txtBoxGraphName.Text);
+                        dataChart.Series[txtBoxGraphName.Text].ChartType = System.Windows.Forms.DataVisualization.
+                                                                                             Charting.SeriesChartType.Line;
+                        dataChart.Series[txtBoxGraphName.Text].Legend = "Legend1";
+                        dataChart.Series[txtBoxGraphName.Text].LegendText = txtBoxGraphName.Text;
+                        dataChart.Series[txtBoxGraphName.Text].ChartArea = "ChartArea" + cmbChartAreaChoice.Text;
+
+                        GetSeries();
+
+                        double x = 0.0;
+
+                        for (int i = 0; i < buferU16.Count; i++)
+                        {
+                            double y = Convert.ToDouble(buferU16[i]);
+                            y = (double)(y * amplVoltage / maxADC);
+                            currentGraphY.Add(y);
+                            dataChart.Series[txtBoxGraphName.Text].Points.AddXY(x, Math.Round(y, 4));
+                            x += 1 / sampleRate;
+                        }
+                        yMax = Math.Ceiling(currentGraphY.Max());
+                        yMin = Math.Floor(currentGraphY.Min());
+                        FormatGraph(yMax, yMin, 1 / sampleRate, "ChartArea" + cmbChartAreaChoice.Text);
+                    }
+
                 }
             }
         }
 
         #endregion
 
-        #region ФОРМАТИРОВАНИЕ ГРАФИКА - GraphFormatting
+        #region ФОРМАТИРОВАНИЕ ГРАФИКА
 
-        private void GraphFormatting(double ymax, double ymin, double stepX, string chartAreaName)
+        private void FormatGraph(double ymax, double ymin, double stepX, string chartAreaName)
         {
 
-            dataChart.ChartAreas[chartAreaName].CursorX.IsUserSelectionEnabled = true;      // ВКЛЮЧИТЬ ВОЗМОДНОСТЬ ВЫДЕЛЕНИЯ КУРСОРОМ ОБЛАСТИ ПО ОСИ Х
+            dataChart.ChartAreas[chartAreaName].CursorX.IsUserSelectionEnabled = true;      // ВКЛЮЧИТЬ ВОЗМОЖНОСТЬ ВЫДЕЛЕНИЯ КУРСОРОМ ОБЛАСТИ ПО ОСИ Х
             dataChart.ChartAreas[chartAreaName].CursorX.Interval = stepX;                   // МИНИМАЛЬНЫЙ ИНТЕРВАЛ ЗУМА КУРСОРА ПО ОСИ X
             dataChart.ChartAreas[chartAreaName].AxisX.ScaleView.Zoomable = true;            // ВКЛЮЧИТЬ ВОЗМОЖНОСТЬ ЗУМА ПО ОСИ Х  
             dataChart.ChartAreas[chartAreaName].AxisX.ScrollBar.IsPositionedInside = true;  // ВКЛЮЧИТЬ ПАНЕЛЬ ПРОКРУТКИ по ОСИ Х
@@ -133,19 +172,18 @@ namespace superGraph
 
         private void btnOpenPort_Click(object sender, EventArgs e)
         {
-
             if (serialPort1.IsOpen == false)
             {
                 serialPort1.PortName = cmbPort.SelectedItem.ToString();
-                serialPort1.DataReceived += new SerialDataReceivedEventHandler( OnDataReceived);
+                serialPort1.DataReceived += new SerialDataReceivedEventHandler(OnDataReceived);
                 serialPort1.Open();
                 btnOpenPort.Enabled = false;
                 btnClosePort.Enabled = true;
                 serialPort1.DiscardInBuffer();
                 buferU16.Clear();
-                pctrbxDataRecivingIndicator.BackColor = Color.Red;
-                label1.Text = "Нет приема";
-                label2.Text = "Получено значений: " + buferU16.Count;
+                PictureBoxUpdater(pctrbxDataRecivingIndicator, Color.Red);
+                lblRecieve.Text = "Нет приема";
+                lblCountOfValues.Text = "Получено значений: " + buferU16.Count;
             }
         }
 
@@ -178,24 +216,32 @@ namespace superGraph
         #region ПРИЕМ ДАННЫХ ИЗ COM ПОРТА
         public void OnDataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
-            if(serialPort1.IsOpen)
+            if (serialPort1.IsOpen && serialPort1.ReadBufferSize != 0)
             {
                 UInt16 x;
 
                 int tt = 0;
 
+                int size = serialPort1.BytesToRead;
+
                 buferIncoming.Clear();
 
                 buferWithoutPreambula.Clear();
 
-                LabelUpdater(label1, "Прием данных из COM порта");
+                LabelUpdater(lblRecieve, "Прием данных из COM порта");
 
-                pctrbxDataRecivingIndicator.BackColor = Color.Yellow;
+                //pctrbxDataRecivingIndicator.BackColor = Color.Yellow;
+                PictureBoxUpdater(pctrbxDataRecivingIndicator, Color.Yellow);
 
                 try
                 {
-                    for (int i = 0; i < buferIncomingSize; i++)
+                    for (int i = 0; i < size; i++)
                     {
+                        if (i == 4000)
+                        {
+
+                        }
+
                         buferIncoming.Add((byte)serialPort1.ReadByte());
                     }
 
@@ -208,61 +254,30 @@ namespace superGraph
                         tt++;
                     }
 
-                    LabelUpdater(label2, "Получено значений: " + buferU16.Count);
+                    LabelUpdater(lblCountOfValues, "Получено значений: " + buferU16.Count);
 
-                    LabelUpdater(label1, "Данные получены!");
+                    LabelUpdater(lblRecieve, "Данные получены!");
 
-                    pctrbxDataRecivingIndicator.BackColor = Color.Green;
+                    PictureBoxUpdater(pctrbxDataRecivingIndicator, Color.Green);
                 }
                 catch (IOException exc)
                 {
                     serialPort1.DataReceived -= OnDataReceived;
                 }
+                catch (Exception)
+                {
+
+                }
 
             }
 
 
 
+            // serialPort1.DiscardInBuffer();
 
-         // serialPort1.DiscardInBuffer();
 
-            /////////////
 
-            /*
-            bool preambula = false;
 
-            for (int t = 0; t < buferIncoming.Count; t++)
-            {
-                if (buferIncoming[t].ToString("X2") == "FE" &&
-                    buferIncoming[t + 1].ToString("X2") == "AA" &&
-                    buferIncoming[t + 2].ToString("X2") == "FC" &&
-                    buferIncoming[t + 3].ToString("X2") == "55")
-                {
-                    preambula = true;
-                    buferWithoutPreambula.Add(buferIncoming[t + 4]);
-                }
-                else if (buferIncoming[t + 4].ToString("X2") == "AA" &&
-                    buferIncoming[t + 5].ToString("X2") == "FE" &&
-                    buferIncoming[t + 6].ToString("X2") == "55" &&
-                    buferIncoming[t + 7].ToString("X2") == "FC")
-                {
-                    break;
-                }
-                else
-                {
-                    if (preambula)
-                    {
-                        buferWithoutPreambula.Add((buferIncoming[t + 4]));
-                    }
-                    else
-                    {
-                        buferWithoutPreambula.Add(buferIncoming[t]);
-                    }
-                }
-            }
-            */
-
-            /////////////
         }
 
 
@@ -283,7 +298,21 @@ namespace superGraph
             }
         }
 
-        #endregion     
+        #endregion
+
+        private void PictureBoxUpdater(PictureBox pctrbox, Color color)
+        {
+
+            if (pctrbox.InvokeRequired)
+            {
+                PictureBoxUpdaterDelegate d = new PictureBoxUpdaterDelegate(PictureBoxUpdater);
+                this.Invoke(d, new object[] { pctrbox, color });
+            }
+            else
+            {
+                pctrbox.BackColor = color;
+            }
+        }
 
         #region ВЫБОР COM ПОРТА - ComboBoxes
         private void ComboBoxes()
@@ -433,7 +462,7 @@ namespace superGraph
                 }
                 yMax = Math.Ceiling(currentGraphY.Max());
                 yMin = Math.Floor(currentGraphY.Min());
-                GraphFormatting(yMax, yMin, 1 / sampleRate, "ChartArea1");
+                FormatGraph(yMax, yMin, 1 / sampleRate, "ChartArea1");
             }
         }
 
@@ -476,8 +505,8 @@ namespace superGraph
             {
                 buferU16.Clear();
                 pctrbxDataRecivingIndicator.BackColor = Color.Red;
-                label1.Text = "Нет приема";
-                label2.Text = "Получено значений: " + buferU16.Count;
+                lblRecieve.Text = "Нет приема";
+                lblCountOfValues.Text = "Получено значений: " + buferU16.Count;
             }
         }
 
@@ -549,6 +578,21 @@ namespace superGraph
                 }
 
             }
+        }
+
+        private void checkBoxSelectBufferData_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBoxSelectFileData.Checked = !checkBoxSelectBufferData.Checked;            
+        }
+
+        private void checkBoxSelectFileData_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBoxSelectBufferData.Checked = !checkBoxSelectFileData.Checked;
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
