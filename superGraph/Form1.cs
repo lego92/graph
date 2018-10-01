@@ -58,13 +58,13 @@ namespace superGraph
 
         private void btnLoadTextFile_Click(object sender, EventArgs e)
         {
-            if (dataChart.Series.Contains(dataChart.Series.FindByName(txtBoxGraphName.Text)))
+            if (checkBoxSelectFileData.Checked)
             {
-                MessageBox.Show("График с таким названием уже существует!", "Ошибка");
-            }
-            else
-            {
-                if (checkBoxSelectFileData.Checked)
+                if (dataChart.Series.Contains(dataChart.Series.FindByName(txtBoxGraphName.Text)))
+                {
+                    MessageBox.Show("График с таким названием уже существует!", "Ошибка");
+                }
+                else
                 {
 
                     if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -101,11 +101,19 @@ namespace superGraph
                     }
 
                 }
-                else if (checkBoxSelectBufferData.Checked)
+            }
+            else if (checkBoxSelectBufferData.Checked)
+            {
+
+                if (buferU16.Count == 0)
                 {
-                    if (buferU16.Count == 0)
+                    MessageBox.Show("Буфер пуст!", "Ошибка");
+                }
+                else
+                {
+                    if (dataChart.Series.Contains(dataChart.Series.FindByName(txtBoxGraphName.Text)))
                     {
-                        MessageBox.Show("Буфер пуст!", "Ошибка");
+                        MessageBox.Show("График с таким названием уже существует!", "Ошибка");
                     }
                     else
                     {
@@ -124,7 +132,7 @@ namespace superGraph
                         for (int i = 0; i < buferU16.Count; i++)
                         {
                             double y = Convert.ToDouble(buferU16[i]);
-                            y = (double)(y * amplVoltage / maxADC);
+                            //y = (double)(y * amplVoltage / maxADC);
                             currentGraphY.Add(y);
                             dataChart.Series[txtBoxGraphName.Text].Points.AddXY(x, Math.Round(y, 4));
                             x += 1 / sampleRate;
@@ -136,6 +144,7 @@ namespace superGraph
 
                 }
             }
+
         }
 
         #endregion
@@ -582,12 +591,14 @@ namespace superGraph
 
         private void checkBoxSelectBufferData_CheckedChanged(object sender, EventArgs e)
         {
-            checkBoxSelectFileData.Checked = !checkBoxSelectBufferData.Checked;            
+            checkBoxSelectFileData.Checked = !checkBoxSelectBufferData.Checked;
+            btnSaveBufferToTextFile.Enabled = true;
         }
 
         private void checkBoxSelectFileData_CheckedChanged(object sender, EventArgs e)
         {
             checkBoxSelectBufferData.Checked = !checkBoxSelectFileData.Checked;
+            btnSaveBufferToTextFile.Enabled = false;
         }
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)

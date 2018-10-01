@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.dataChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.btnLoadTextFile = new System.Windows.Forms.Button();
+            this.btnShowDataFrom = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
@@ -62,37 +62,38 @@
             // 
             // dataChart
             // 
-            chartArea11.AxisX.IsMarginVisible = false;
-            chartArea11.AxisX.MajorTickMark.Interval = 0.5D;
-            chartArea11.AxisX.MaximumAutoSize = 25F;
-            chartArea11.CursorX.Interval = 0.00125D;
-            chartArea11.InnerPlotPosition.Auto = false;
-            chartArea11.InnerPlotPosition.Height = 90F;
-            chartArea11.InnerPlotPosition.Width = 90F;
-            chartArea11.InnerPlotPosition.X = 10F;
-            chartArea11.IsSameFontSizeForAllAxes = true;
-            chartArea11.Name = "ChartArea1";
-            this.dataChart.ChartAreas.Add(chartArea11);
+            chartArea1.AxisX.IsMarginVisible = false;
+            chartArea1.AxisX.MajorTickMark.Interval = 0.5D;
+            chartArea1.AxisX.MaximumAutoSize = 25F;
+            chartArea1.BackColor = System.Drawing.Color.WhiteSmoke;
+            chartArea1.BackSecondaryColor = System.Drawing.Color.White;
+            chartArea1.CursorX.Interval = 0.00125D;
+            chartArea1.InnerPlotPosition.Auto = false;
+            chartArea1.InnerPlotPosition.Height = 90F;
+            chartArea1.InnerPlotPosition.Width = 90F;
+            chartArea1.InnerPlotPosition.X = 10F;
+            chartArea1.IsSameFontSizeForAllAxes = true;
+            chartArea1.Name = "ChartArea1";
+            this.dataChart.ChartAreas.Add(chartArea1);
             this.dataChart.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            legend11.Name = "Legend1";
-            this.dataChart.Legends.Add(legend11);
+            legend1.Name = "Legend1";
+            this.dataChart.Legends.Add(legend1);
             this.dataChart.Location = new System.Drawing.Point(12, 12);
             this.dataChart.Name = "dataChart";
             this.dataChart.Size = new System.Drawing.Size(1374, 687);
             this.dataChart.TabIndex = 0;
             this.dataChart.Text = "dataChart";
             // 
-            // btnLoadTextFile
+            // btnShowDataFrom
             // 
-            this.btnLoadTextFile.Enabled = false;
-            this.btnLoadTextFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnLoadTextFile.Location = new System.Drawing.Point(28, 734);
-            this.btnLoadTextFile.Name = "btnLoadTextFile";
-            this.btnLoadTextFile.Size = new System.Drawing.Size(176, 62);
-            this.btnLoadTextFile.TabIndex = 1;
-            this.btnLoadTextFile.Text = "Отобразить данные на графике";
-            this.btnLoadTextFile.UseVisualStyleBackColor = true;
-            this.btnLoadTextFile.Click += new System.EventHandler(this.btnLoadTextFile_Click);
+            this.btnShowDataFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnShowDataFrom.Location = new System.Drawing.Point(28, 734);
+            this.btnShowDataFrom.Name = "btnShowDataFrom";
+            this.btnShowDataFrom.Size = new System.Drawing.Size(176, 62);
+            this.btnShowDataFrom.TabIndex = 1;
+            this.btnShowDataFrom.Text = "Отобразить данные на графике";
+            this.btnShowDataFrom.UseVisualStyleBackColor = true;
+            this.btnShowDataFrom.Click += new System.EventHandler(this.btnLoadTextFile_Click);
             // 
             // openFileDialog1
             // 
@@ -206,7 +207,7 @@
             this.chkbxIsGraphNormalized.AutoSize = true;
             this.chkbxIsGraphNormalized.Enabled = false;
             this.chkbxIsGraphNormalized.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.chkbxIsGraphNormalized.Location = new System.Drawing.Point(224, 858);
+            this.chkbxIsGraphNormalized.Location = new System.Drawing.Point(225, 838);
             this.chkbxIsGraphNormalized.Name = "chkbxIsGraphNormalized";
             this.chkbxIsGraphNormalized.Size = new System.Drawing.Size(294, 20);
             this.chkbxIsGraphNormalized.TabIndex = 39;
@@ -256,13 +257,12 @@
             // 
             // btnSaveBufferToTextFile
             // 
-            this.btnSaveBufferToTextFile.Enabled = false;
             this.btnSaveBufferToTextFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSaveBufferToTextFile.Location = new System.Drawing.Point(28, 826);
+            this.btnSaveBufferToTextFile.Location = new System.Drawing.Point(29, 815);
             this.btnSaveBufferToTextFile.Name = "btnSaveBufferToTextFile";
             this.btnSaveBufferToTextFile.Size = new System.Drawing.Size(175, 63);
             this.btnSaveBufferToTextFile.TabIndex = 46;
-            this.btnSaveBufferToTextFile.Text = "Сохранить данные в текстовый файл";
+            this.btnSaveBufferToTextFile.Text = "Сохранить буфер в текстовый файл";
             this.btnSaveBufferToTextFile.UseVisualStyleBackColor = true;
             this.btnSaveBufferToTextFile.Click += new System.EventHandler(this.btnSaveBufferToTextFile_Click);
             // 
@@ -347,7 +347,7 @@
             this.Controls.Add(this.cmbPort);
             this.Controls.Add(this.btnClosePort);
             this.Controls.Add(this.btnOpenPort);
-            this.Controls.Add(this.btnLoadTextFile);
+            this.Controls.Add(this.btnShowDataFrom);
             this.Controls.Add(this.dataChart);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximumSize = new System.Drawing.Size(2000, 2000);
@@ -365,7 +365,7 @@
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart dataChart;
-        private System.Windows.Forms.Button btnLoadTextFile;
+        private System.Windows.Forms.Button btnShowDataFrom;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.IO.Ports.SerialPort serialPort1;
