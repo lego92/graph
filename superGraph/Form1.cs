@@ -216,8 +216,6 @@ namespace superGraph
             {
                 UInt16 x;
 
-                int tt = 0;
-
                 int size = serialPort1.BytesToRead;
 
                 buferIncoming.Clear();
@@ -246,7 +244,6 @@ namespace superGraph
                         x = (UInt16)(x << 8);
                         x = (UInt16)(x | buferIncoming[t + 1]);
                         buferU16.Add(x);
-                        tt++;
                     }
 
                     LabelUpdater(lblCountOfValues, "Значений в буфере: " + buferU16.Count);
@@ -338,6 +335,7 @@ namespace superGraph
                 dataChart.ChartAreas["ChartArea2"].InnerPlotPosition.X = 10F;
                 dataChart.ChartAreas["ChartArea2"].IsSameFontSizeForAllAxes = true;
                 dataChart.ChartAreas["ChartArea2"].BackColor = Color.WhiteSmoke;
+                dataChart.ChartAreas["ChartArea2"].AxisX.MajorGrid.Interval = 0.1;
                 cmbChartAreaChoice.Items.Add(2);
             }
             else
