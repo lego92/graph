@@ -48,15 +48,13 @@ namespace superGraph
         public Form1()
         {
             InitializeComponent();
-            ComboBoxes();
+            UpdatePortComboBox();
             cmbChartAreaChoice.Items.Add(1);
             cmbChartAreaChoice.SelectedIndex = 0;
             txtBoxGraphName.Text = "Без названия";
         }
 
-        #region ОТКРЫТИЕ И ОТОБРАЖЕНИЕ ТЕКСТОВОГО ФАЙЛА НА ГРАФИКЕ
-
-        private void btnLoadTextFile_Click(object sender, EventArgs e)
+        private void btnShowDataFrom_Click(object sender, EventArgs e)
         {
             if (checkBoxSelectFileData.Checked)
             {
@@ -77,7 +75,7 @@ namespace superGraph
                         dataChart.Series[txtBoxGraphName.Text].LegendText = txtBoxGraphName.Text;
                         dataChart.Series[txtBoxGraphName.Text].ChartArea = "ChartArea" + cmbChartAreaChoice.Text;
 
-                        GetSeries();
+                        UpdateGraphsComboBox();
 
                         StreamReader streamReader = new StreamReader(openFileDialog1.FileName);
 
@@ -88,7 +86,7 @@ namespace superGraph
                             double y = Convert.ToDouble(streamReader.ReadLine());
                             if (chkbxIsGraphNormalized.Checked)
                             {
-                                y = (double)(y * amplVoltage / maxADC);
+                                y = y * amplVoltage / maxADC;
                             }
                             currentGraphY.Add(y);
                             dataChart.Series[txtBoxGraphName.Text].Points.AddXY(x, Math.Round(y, 4));
@@ -125,14 +123,17 @@ namespace superGraph
                         dataChart.Series[txtBoxGraphName.Text].LegendText = txtBoxGraphName.Text;
                         dataChart.Series[txtBoxGraphName.Text].ChartArea = "ChartArea" + cmbChartAreaChoice.Text;
 
-                        GetSeries();
+                        UpdateGraphsComboBox();
 
                         double x = 0.0;
 
                         for (int i = 0; i < buferU16.Count; i++)
                         {
                             double y = Convert.ToDouble(buferU16[i]);
-                            //y = (double)(y * amplVoltage / maxADC);
+                            if (chkbxIsGraphNormalized.Checked)
+                            {
+                                y = y * amplVoltage / maxADC;
+                            }
                             currentGraphY.Add(y);
                             dataChart.Series[txtBoxGraphName.Text].Points.AddXY(x, Math.Round(y, 4));
                             x += 1 / sampleRate;
@@ -147,17 +148,13 @@ namespace superGraph
 
         }
 
-        #endregion
-
-        #region ФОРМАТИРОВАНИЕ ГРАФИКА
-
         private void FormatGraph(double ymax, double ymin, double stepX, string chartAreaName)
         {
 
             dataChart.ChartAreas[chartAreaName].CursorX.IsUserSelectionEnabled = true;      // ВКЛЮЧИТЬ ВОЗМОЖНОСТЬ ВЫДЕЛЕНИЯ КУРСОРОМ ОБЛАСТИ ПО ОСИ Х
             dataChart.ChartAreas[chartAreaName].CursorX.Interval = stepX;                   // МИНИМАЛЬНЫЙ ИНТЕРВАЛ ЗУМА КУРСОРА ПО ОСИ X
             dataChart.ChartAreas[chartAreaName].AxisX.ScaleView.Zoomable = true;            // ВКЛЮЧИТЬ ВОЗМОЖНОСТЬ ЗУМА ПО ОСИ Х  
-            dataChart.ChartAreas[chartAreaName].AxisX.ScrollBar.IsPositionedInside = true;  // ВКЛЮЧИТЬ ПАНЕЛЬ ПРОКРУТКИ по ОСИ Х
+            dataChart.ChartAreas[chartAreaName].AxisX.ScrollBar.IsPositionedInside = true;  // ВКЛЮЧИТЬ ПАНЕЛЬ ПРОКРУТКИ ПО ОСИ Х
             dataChart.ChartAreas[chartAreaName].AxisX.ScaleView.SmallScrollSize = 0.2;      // ШАГ ПАНЕЛИ ПРОКРУТКИ ПО ОСИ Х
 
             if (ymax >= dataChart.ChartAreas[chartAreaName].AxisY.Maximum || double.IsNaN(dataChart.ChartAreas[chartAreaName].AxisY.Maximum))
@@ -171,13 +168,9 @@ namespace superGraph
             dataChart.ChartAreas[chartAreaName].CursorY.IsUserSelectionEnabled = true;      // ВКЛЮЧИТЬ ВОЗМОДНОСТЬ ВЫДЕЛЕНИЯ КУРСОРОМ ОБЛАСТИ по ОСИ Y
             dataChart.ChartAreas[chartAreaName].CursorY.Interval = 0.005;                   // МИНИМАЛЬНЫЙ ИНТЕРВАЛ ЗУМА КУРСОРА ПО ОСИ Y
             dataChart.ChartAreas[chartAreaName].AxisY.ScaleView.Zoomable = true;            // ВКЛЮЧИТЬ ВОЗМОЖНОСТЬ ЗУМА ПО ОСИ Y  
-            dataChart.ChartAreas[chartAreaName].AxisY.ScrollBar.IsPositionedInside = true;  // ВКЛЮЧИТЬ ПАНЕЛЬ ПРОКРУТКИ по ОСИ Y
+            dataChart.ChartAreas[chartAreaName].AxisY.ScrollBar.IsPositionedInside = true;  // ВКЛЮЧИТЬ ПАНЕЛЬ ПРОКРУТКИ ПО ОСИ Y
             dataChart.ChartAreas[chartAreaName].AxisY.ScaleView.SmallScrollSize = 0.005;    // ШАГ ПАНЕЛИ ПРОКРУТКИ ПО ОСИ Y
         }
-
-        #endregion                
-
-        #region ОТКРЫТИЕ ПОРТА
 
         private void btnOpenPort_Click(object sender, EventArgs e)
         {
@@ -195,10 +188,6 @@ namespace superGraph
                 lblCountOfValues.Text = "Получено значений: " + buferU16.Count;
             }
         }
-
-        #endregion
-
-        #region ЗАКРЫТИЕ ПОРТА
 
         private void btnClosePort_Click(object sender, EventArgs e)
         {
@@ -220,9 +209,6 @@ namespace superGraph
             }
         }
 
-        #endregion
-
-        #region ПРИЕМ ДАННЫХ ИЗ COM ПОРТА
         public void OnDataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
             if (serialPort1.IsOpen && serialPort1.ReadBufferSize != 0)
@@ -263,7 +249,7 @@ namespace superGraph
                         tt++;
                     }
 
-                    LabelUpdater(lblCountOfValues, "Получено значений: " + buferU16.Count);
+                    LabelUpdater(lblCountOfValues, "Значений в буфере: " + buferU16.Count);
 
                     LabelUpdater(lblRecieve, "Данные получены!");
 
@@ -289,10 +275,6 @@ namespace superGraph
 
         }
 
-
-        #endregion
-
-        #region ОБНОВЛЕНИЕ НАДПИСИ ПРИЕМА ДАННЫХ
         private void LabelUpdater(Label label, string labelText)
         {
 
@@ -306,8 +288,6 @@ namespace superGraph
                 label.Text = labelText;
             }
         }
-
-        #endregion
 
         private void PictureBoxUpdater(PictureBox pctrbox, Color color)
         {
@@ -323,9 +303,9 @@ namespace superGraph
             }
         }
 
-        #region ВЫБОР COM ПОРТА - ComboBoxes
-        private void ComboBoxes()
+        private void UpdatePortComboBox()
         {
+            cmbPort.Items.Clear();
 
             string[] ports = SerialPort.GetPortNames();
 
@@ -337,26 +317,11 @@ namespace superGraph
             cmbPort.SelectedIndex = 0;
         }
 
-
-        #endregion
-
-        #region ОБНОВЛЕНИЕ СПИСКА COM ПОРТОВ
         private void btnRefreshPortsList_Click(object sender, EventArgs e)
         {
-
-            cmbPort.Items.Clear();
-
-            string[] ports = SerialPort.GetPortNames();
-
-            foreach (string port in ports)
-            {
-                cmbPort.Items.Add(port);
-            }
+            UpdatePortComboBox();            
         }
 
-        #endregion
-
-        #region СОЗДАНИЕ ВТОРОЙ ОБЛАСТИ ПОСТРОЕНИЯ
         private void btnCreateSecondChartArea_Click(object sender, EventArgs e)
         {
 
@@ -372,6 +337,7 @@ namespace superGraph
                 dataChart.ChartAreas["ChartArea2"].InnerPlotPosition.Width = 90F;
                 dataChart.ChartAreas["ChartArea2"].InnerPlotPosition.X = 10F;
                 dataChart.ChartAreas["ChartArea2"].IsSameFontSizeForAllAxes = true;
+                dataChart.ChartAreas["ChartArea2"].BackColor = Color.WhiteSmoke;
                 cmbChartAreaChoice.Items.Add(2);
             }
             else
@@ -380,9 +346,6 @@ namespace superGraph
             }
         }
 
-        #endregion
-
-        #region УДАЛЕНИЕ ВТОРОЙ ОБЛАСТИ ПОСТРОЕНИЯ
         private void btnDeleteSecondChartArea_Click(object sender, EventArgs e)
         {
 
@@ -391,7 +354,7 @@ namespace superGraph
                 dataChart.ChartAreas.RemoveAt(1);
                 cmbChartAreaChoice.Items.RemoveAt(1);
 
-                GetSeries();
+                UpdateGraphsComboBox();
 
                 cmbChartAreaChoice.SelectedIndex = 0;
             }
@@ -401,29 +364,22 @@ namespace superGraph
             }
         }
 
-        #endregion 
-
-        #region УДАЛЕНИЕ ВЫБРАННОГО ГРАФИКА
         private void btnDeleteChosenGraph_Click(object sender, EventArgs e)
         {
 
             if (cmbDeleteGraphChoise.Text == "")
             {
-                MessageBox.Show("График не выбран!", "Ошибка");
+                //MessageBox.Show("График не выбран!", "Ошибка");
             }
             else
             {
                 dataChart.Series.Remove(dataChart.Series[cmbDeleteGraphChoise.Text]);
-                GetSeries();
+                UpdateGraphsComboBox();
             }
         }
 
-        #endregion
-
-        #region ОБНОВИТЬ СПИСОК ГРАФИКОВ
-        private void GetSeries()
+        private void UpdateGraphsComboBox()
         {
-
             cmbDeleteGraphChoise.Items.Clear();
             cmbDeleteGraphChoise.Text = "";
             if (dataChart.Series.Count != 0)
@@ -436,9 +392,6 @@ namespace superGraph
             }
         }
 
-        #endregion
-
-        #region ВЫВЕСТИ ПОЛУЧЕННЫЙ БУФЕР НА ГРАФИК
         private void btnShowBufferOnGraph_Click(object sender, EventArgs e)
         {
 
@@ -456,7 +409,7 @@ namespace superGraph
                 dataChart.Series["Входной буфер"].LegendText = txtBoxGraphName.Text;
                 dataChart.Series["Входной буфер"].ChartArea = "ChartArea1";
 
-                GetSeries();
+                UpdateGraphsComboBox();
 
 
                 double x = 0.0;
@@ -475,13 +428,8 @@ namespace superGraph
             }
         }
 
-        #endregion
-
-        #region СОХРАНИТЬ ПОЛУЧЕННЫЙ БУФЕР В ТЕКСТОВЫЙ ФАЙЛ
-
         private void btnSaveBufferToTextFile_Click(object sender, EventArgs e)
         {
-
             if (buferU16.Count == 0)
             {
                 MessageBox.Show("Буфер пуст!", "Ошибка");
@@ -501,25 +449,13 @@ namespace superGraph
             }
         }
 
-        #endregion
-
-        #region ОЧИСТИТЬ ВЫХОДНОЙ БУФЕР
         private void btnClearBuffer_Click(object sender, EventArgs e)
-        {
-            if (buferU16.Count == 0)
-            {
-                MessageBox.Show("Буфер пуст!", "Ошибка");
-            }
-            else
-            {
+        {            
                 buferU16.Clear();
                 pctrbxDataRecivingIndicator.BackColor = Color.Red;
                 lblRecieve.Text = "Нет приема";
-                lblCountOfValues.Text = "Получено значений: " + buferU16.Count;
-            }
+                lblCountOfValues.Text = "Значений в буфере: " + buferU16.Count;            
         }
-
-        #endregion
 
         private void btnFilteringAndVisual_Click(object sender, EventArgs e)
         {
@@ -601,7 +537,7 @@ namespace superGraph
             btnSaveBufferToTextFile.Enabled = false;
         }
 
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void chkbxIsGraphNormalized_CheckedChanged(object sender, EventArgs e)
         {
 
         }

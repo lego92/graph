@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea14 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend14 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.dataChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnShowDataFrom = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -56,28 +56,29 @@
             this.label3 = new System.Windows.Forms.Label();
             this.checkBoxSelectBufferData = new System.Windows.Forms.CheckBox();
             this.checkBoxSelectFileData = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctrbxDataRecivingIndicator)).BeginInit();
             this.SuspendLayout();
             // 
             // dataChart
             // 
-            chartArea1.AxisX.IsMarginVisible = false;
-            chartArea1.AxisX.MajorTickMark.Interval = 0.5D;
-            chartArea1.AxisX.MaximumAutoSize = 25F;
-            chartArea1.BackColor = System.Drawing.Color.WhiteSmoke;
-            chartArea1.BackSecondaryColor = System.Drawing.Color.White;
-            chartArea1.CursorX.Interval = 0.00125D;
-            chartArea1.InnerPlotPosition.Auto = false;
-            chartArea1.InnerPlotPosition.Height = 90F;
-            chartArea1.InnerPlotPosition.Width = 90F;
-            chartArea1.InnerPlotPosition.X = 10F;
-            chartArea1.IsSameFontSizeForAllAxes = true;
-            chartArea1.Name = "ChartArea1";
-            this.dataChart.ChartAreas.Add(chartArea1);
+            chartArea14.AxisX.IsMarginVisible = false;
+            chartArea14.AxisX.MajorTickMark.Interval = 0.5D;
+            chartArea14.AxisX.MaximumAutoSize = 25F;
+            chartArea14.BackColor = System.Drawing.Color.WhiteSmoke;
+            chartArea14.BackSecondaryColor = System.Drawing.Color.White;
+            chartArea14.CursorX.Interval = 0.00125D;
+            chartArea14.InnerPlotPosition.Auto = false;
+            chartArea14.InnerPlotPosition.Height = 90F;
+            chartArea14.InnerPlotPosition.Width = 90F;
+            chartArea14.InnerPlotPosition.X = 10F;
+            chartArea14.IsSameFontSizeForAllAxes = true;
+            chartArea14.Name = "ChartArea1";
+            this.dataChart.ChartAreas.Add(chartArea14);
             this.dataChart.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            legend1.Name = "Legend1";
-            this.dataChart.Legends.Add(legend1);
+            legend14.Name = "Legend1";
+            this.dataChart.Legends.Add(legend14);
             this.dataChart.Location = new System.Drawing.Point(12, 12);
             this.dataChart.Name = "dataChart";
             this.dataChart.Size = new System.Drawing.Size(1374, 687);
@@ -87,13 +88,13 @@
             // btnShowDataFrom
             // 
             this.btnShowDataFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnShowDataFrom.Location = new System.Drawing.Point(28, 734);
+            this.btnShowDataFrom.Location = new System.Drawing.Point(29, 730);
             this.btnShowDataFrom.Name = "btnShowDataFrom";
-            this.btnShowDataFrom.Size = new System.Drawing.Size(176, 62);
+            this.btnShowDataFrom.Size = new System.Drawing.Size(176, 80);
             this.btnShowDataFrom.TabIndex = 1;
             this.btnShowDataFrom.Text = "Отобразить данные на графике";
             this.btnShowDataFrom.UseVisualStyleBackColor = true;
-            this.btnShowDataFrom.Click += new System.EventHandler(this.btnLoadTextFile_Click);
+            this.btnShowDataFrom.Click += new System.EventHandler(this.btnShowDataFrom_Click);
             // 
             // openFileDialog1
             // 
@@ -113,9 +114,9 @@
             // btnOpenPort
             // 
             this.btnOpenPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnOpenPort.Location = new System.Drawing.Point(993, 734);
+            this.btnOpenPort.Location = new System.Drawing.Point(1033, 757);
             this.btnOpenPort.Name = "btnOpenPort";
-            this.btnOpenPort.Size = new System.Drawing.Size(158, 45);
+            this.btnOpenPort.Size = new System.Drawing.Size(158, 54);
             this.btnOpenPort.TabIndex = 12;
             this.btnOpenPort.Text = "Открыть порт";
             this.btnOpenPort.UseVisualStyleBackColor = true;
@@ -123,10 +124,11 @@
             // 
             // btnClosePort
             // 
+            this.btnClosePort.Enabled = false;
             this.btnClosePort.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnClosePort.Location = new System.Drawing.Point(993, 787);
+            this.btnClosePort.Location = new System.Drawing.Point(1033, 829);
             this.btnClosePort.Name = "btnClosePort";
-            this.btnClosePort.Size = new System.Drawing.Size(158, 47);
+            this.btnClosePort.Size = new System.Drawing.Size(158, 56);
             this.btnClosePort.TabIndex = 13;
             this.btnClosePort.Text = "Закрыть порт";
             this.btnClosePort.UseVisualStyleBackColor = true;
@@ -136,7 +138,7 @@
             // 
             this.cmbPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmbPort.FormattingEnabled = true;
-            this.cmbPort.Location = new System.Drawing.Point(807, 746);
+            this.cmbPort.Location = new System.Drawing.Point(847, 769);
             this.cmbPort.Name = "cmbPort";
             this.cmbPort.Size = new System.Drawing.Size(158, 24);
             this.cmbPort.TabIndex = 29;
@@ -144,9 +146,9 @@
             // btnRefreshPortsList
             // 
             this.btnRefreshPortsList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnRefreshPortsList.Location = new System.Drawing.Point(807, 779);
+            this.btnRefreshPortsList.Location = new System.Drawing.Point(847, 810);
             this.btnRefreshPortsList.Name = "btnRefreshPortsList";
-            this.btnRefreshPortsList.Size = new System.Drawing.Size(158, 55);
+            this.btnRefreshPortsList.Size = new System.Drawing.Size(158, 75);
             this.btnRefreshPortsList.TabIndex = 30;
             this.btnRefreshPortsList.Text = "Обновить список доступных портов";
             this.btnRefreshPortsList.UseVisualStyleBackColor = true;
@@ -159,18 +161,18 @@
             this.btnCreateSecondChartArea.Name = "btnCreateSecondChartArea";
             this.btnCreateSecondChartArea.Size = new System.Drawing.Size(158, 74);
             this.btnCreateSecondChartArea.TabIndex = 31;
-            this.btnCreateSecondChartArea.Text = "Добавить область построения";
+            this.btnCreateSecondChartArea.Text = "Добавить вторую область построения";
             this.btnCreateSecondChartArea.UseVisualStyleBackColor = true;
             this.btnCreateSecondChartArea.Click += new System.EventHandler(this.btnCreateSecondChartArea_Click);
             // 
             // btnDeleteSecondChartArea
             // 
             this.btnDeleteSecondChartArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnDeleteSecondChartArea.Location = new System.Drawing.Point(1401, 106);
+            this.btnDeleteSecondChartArea.Location = new System.Drawing.Point(1401, 116);
             this.btnDeleteSecondChartArea.Name = "btnDeleteSecondChartArea";
             this.btnDeleteSecondChartArea.Size = new System.Drawing.Size(158, 74);
             this.btnDeleteSecondChartArea.TabIndex = 32;
-            this.btnDeleteSecondChartArea.Text = "Удалить область построения";
+            this.btnDeleteSecondChartArea.Text = "Удалить вторую область построения";
             this.btnDeleteSecondChartArea.UseVisualStyleBackColor = true;
             this.btnDeleteSecondChartArea.Click += new System.EventHandler(this.btnDeleteSecondChartArea_Click);
             // 
@@ -178,7 +180,7 @@
             // 
             this.cmbChartAreaChoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmbChartAreaChoice.FormattingEnabled = true;
-            this.cmbChartAreaChoice.Location = new System.Drawing.Point(352, 786);
+            this.cmbChartAreaChoice.Location = new System.Drawing.Point(361, 802);
             this.cmbChartAreaChoice.Name = "cmbChartAreaChoice";
             this.cmbChartAreaChoice.Size = new System.Drawing.Size(121, 24);
             this.cmbChartAreaChoice.TabIndex = 33;
@@ -188,7 +190,7 @@
             // 
             this.labelChartAreaChoise.AutoSize = true;
             this.labelChartAreaChoise.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelChartAreaChoise.Location = new System.Drawing.Point(352, 734);
+            this.labelChartAreaChoise.Location = new System.Drawing.Point(361, 738);
             this.labelChartAreaChoise.Name = "labelChartAreaChoise";
             this.labelChartAreaChoise.Size = new System.Drawing.Size(328, 40);
             this.labelChartAreaChoise.TabIndex = 36;
@@ -197,7 +199,7 @@
             // txtBoxGraphName
             // 
             this.txtBoxGraphName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtBoxGraphName.Location = new System.Drawing.Point(493, 784);
+            this.txtBoxGraphName.Location = new System.Drawing.Point(498, 802);
             this.txtBoxGraphName.Name = "txtBoxGraphName";
             this.txtBoxGraphName.Size = new System.Drawing.Size(166, 26);
             this.txtBoxGraphName.TabIndex = 38;
@@ -205,20 +207,19 @@
             // chkbxIsGraphNormalized
             // 
             this.chkbxIsGraphNormalized.AutoSize = true;
-            this.chkbxIsGraphNormalized.Enabled = false;
-            this.chkbxIsGraphNormalized.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.chkbxIsGraphNormalized.Location = new System.Drawing.Point(225, 838);
+            this.chkbxIsGraphNormalized.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.chkbxIsGraphNormalized.Location = new System.Drawing.Point(365, 852);
             this.chkbxIsGraphNormalized.Name = "chkbxIsGraphNormalized";
-            this.chkbxIsGraphNormalized.Size = new System.Drawing.Size(294, 20);
+            this.chkbxIsGraphNormalized.Size = new System.Drawing.Size(286, 44);
             this.chkbxIsGraphNormalized.TabIndex = 39;
-            this.chkbxIsGraphNormalized.Text = "Нормировать график относительно 3.3 В";
+            this.chkbxIsGraphNormalized.Text = "Нормировать выводимый график\r\nотносительно 3.3 В ";
             this.chkbxIsGraphNormalized.UseVisualStyleBackColor = true;
-            this.chkbxIsGraphNormalized.Visible = false;
+            this.chkbxIsGraphNormalized.CheckedChanged += new System.EventHandler(this.chkbxIsGraphNormalized_CheckedChanged);
             // 
             // btnDeleteChosenGraph
             // 
             this.btnDeleteChosenGraph.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnDeleteChosenGraph.Location = new System.Drawing.Point(1401, 186);
+            this.btnDeleteChosenGraph.Location = new System.Drawing.Point(1401, 205);
             this.btnDeleteChosenGraph.Name = "btnDeleteChosenGraph";
             this.btnDeleteChosenGraph.Size = new System.Drawing.Size(158, 74);
             this.btnDeleteChosenGraph.TabIndex = 40;
@@ -230,7 +231,7 @@
             // 
             this.cmbDeleteGraphChoise.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmbDeleteGraphChoise.FormattingEnabled = true;
-            this.cmbDeleteGraphChoise.Location = new System.Drawing.Point(1401, 266);
+            this.cmbDeleteGraphChoise.Location = new System.Drawing.Point(1401, 296);
             this.cmbDeleteGraphChoise.Name = "cmbDeleteGraphChoise";
             this.cmbDeleteGraphChoise.Size = new System.Drawing.Size(158, 24);
             this.cmbDeleteGraphChoise.TabIndex = 41;
@@ -239,7 +240,7 @@
             // 
             this.lblRecieve.AutoSize = true;
             this.lblRecieve.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblRecieve.Location = new System.Drawing.Point(1209, 734);
+            this.lblRecieve.Location = new System.Drawing.Point(1251, 761);
             this.lblRecieve.Name = "lblRecieve";
             this.lblRecieve.Size = new System.Drawing.Size(89, 18);
             this.lblRecieve.TabIndex = 44;
@@ -249,7 +250,7 @@
             // 
             this.pctrbxDataRecivingIndicator.BackColor = System.Drawing.Color.Red;
             this.pctrbxDataRecivingIndicator.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pctrbxDataRecivingIndicator.Location = new System.Drawing.Point(1185, 734);
+            this.pctrbxDataRecivingIndicator.Location = new System.Drawing.Point(1227, 761);
             this.pctrbxDataRecivingIndicator.Name = "pctrbxDataRecivingIndicator";
             this.pctrbxDataRecivingIndicator.Size = new System.Drawing.Size(18, 18);
             this.pctrbxDataRecivingIndicator.TabIndex = 45;
@@ -257,10 +258,11 @@
             // 
             // btnSaveBufferToTextFile
             // 
+            this.btnSaveBufferToTextFile.Enabled = false;
             this.btnSaveBufferToTextFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSaveBufferToTextFile.Location = new System.Drawing.Point(29, 815);
+            this.btnSaveBufferToTextFile.Location = new System.Drawing.Point(30, 829);
             this.btnSaveBufferToTextFile.Name = "btnSaveBufferToTextFile";
-            this.btnSaveBufferToTextFile.Size = new System.Drawing.Size(175, 63);
+            this.btnSaveBufferToTextFile.Size = new System.Drawing.Size(175, 78);
             this.btnSaveBufferToTextFile.TabIndex = 46;
             this.btnSaveBufferToTextFile.Text = "Сохранить буфер в текстовый файл";
             this.btnSaveBufferToTextFile.UseVisualStyleBackColor = true;
@@ -269,7 +271,7 @@
             // btnClearBuffer
             // 
             this.btnClearBuffer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnClearBuffer.Location = new System.Drawing.Point(1184, 792);
+            this.btnClearBuffer.Location = new System.Drawing.Point(1222, 840);
             this.btnClearBuffer.Name = "btnClearBuffer";
             this.btnClearBuffer.Size = new System.Drawing.Size(158, 41);
             this.btnClearBuffer.TabIndex = 47;
@@ -281,11 +283,11 @@
             // 
             this.lblCountOfValues.AutoSize = true;
             this.lblCountOfValues.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblCountOfValues.Location = new System.Drawing.Point(1181, 761);
+            this.lblCountOfValues.Location = new System.Drawing.Point(1222, 802);
             this.lblCountOfValues.Name = "lblCountOfValues";
-            this.lblCountOfValues.Size = new System.Drawing.Size(161, 18);
+            this.lblCountOfValues.Size = new System.Drawing.Size(159, 18);
             this.lblCountOfValues.TabIndex = 48;
-            this.lblCountOfValues.Text = "Получено значений: 0";
+            this.lblCountOfValues.Text = "Значений в буфере: 0";
             // 
             // label3
             // 
@@ -298,8 +300,6 @@
             // checkBoxSelectBufferData
             // 
             this.checkBoxSelectBufferData.AutoSize = true;
-            this.checkBoxSelectBufferData.Checked = true;
-            this.checkBoxSelectBufferData.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxSelectBufferData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.checkBoxSelectBufferData.Location = new System.Drawing.Point(225, 738);
             this.checkBoxSelectBufferData.Name = "checkBoxSelectBufferData";
@@ -312,8 +312,10 @@
             // checkBoxSelectFileData
             // 
             this.checkBoxSelectFileData.AutoSize = true;
+            this.checkBoxSelectFileData.Checked = true;
+            this.checkBoxSelectFileData.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxSelectFileData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxSelectFileData.Location = new System.Drawing.Point(225, 772);
+            this.checkBoxSelectFileData.Location = new System.Drawing.Point(225, 777);
             this.checkBoxSelectFileData.Name = "checkBoxSelectFileData";
             this.checkBoxSelectFileData.Size = new System.Drawing.Size(101, 24);
             this.checkBoxSelectFileData.TabIndex = 51;
@@ -321,12 +323,22 @@
             this.checkBoxSelectFileData.UseVisualStyleBackColor = true;
             this.checkBoxSelectFileData.CheckedChanged += new System.EventHandler(this.checkBoxSelectFileData_CheckedChanged);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(760, 730);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(9, 195);
+            this.label2.TabIndex = 54;
+            this.label2.Text = "|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1571, 912);
+            this.ClientSize = new System.Drawing.Size(1571, 948);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.checkBoxSelectFileData);
             this.Controls.Add(this.checkBoxSelectBufferData);
             this.Controls.Add(this.label3);
@@ -389,6 +401,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox checkBoxSelectBufferData;
         private System.Windows.Forms.CheckBox checkBoxSelectFileData;
+        private System.Windows.Forms.Label label2;
     }
 }
 
