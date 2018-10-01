@@ -226,7 +226,6 @@ namespace superGraph
 
                 LabelUpdater(lblRecieve, "Прием данных из COM порта");
 
-                //pctrbxDataRecivingIndicator.BackColor = Color.Yellow;
                 PictureBoxUpdater(pctrbxDataRecivingIndicator, Color.Yellow);
 
                 try
