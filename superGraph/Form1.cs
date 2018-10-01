@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.IO.Ports;
 using System.IO;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace superGraph
 {
@@ -373,7 +374,24 @@ namespace superGraph
             }
             else
             {
+                bool format = true;
+                string delGraphChartAreaName = dataChart.Series[cmbDeleteGraphChoise.Text].ChartArea;
                 dataChart.Series.Remove(dataChart.Series[cmbDeleteGraphChoise.Text]);
+                foreach (Series serie in dataChart.Series)
+                {
+                    if (serie.ChartArea == delGraphChartAreaName)
+                    {
+                        format = false;
+                        break;
+                    }
+                }
+
+                if (format)
+                {
+                    dataChart.ChartAreas[delGraphChartAreaName].AxisY.Maximum = Double.NaN;
+                    dataChart.ChartAreas[delGraphChartAreaName].AxisY.Minimum = Double.NaN;
+                }
+
                 UpdateGraphsComboBox();
             }
         }
@@ -457,7 +475,7 @@ namespace superGraph
                 lblCountOfValues.Text = "Значений в буфере: " + buferU16.Count;            
         }
 
-        private void btnFilteringAndVisual_Click(object sender, EventArgs e)
+        private void FilterAndShow()
         {
             if (dataChart.Series[0].Points.Count != 0)
             {
@@ -489,7 +507,7 @@ namespace superGraph
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void GetSinusoidalLine()
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
