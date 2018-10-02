@@ -9,24 +9,29 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace superGraph
 {
-    delegate void LabelUpdaterDelegate(Label lbl, string lblText);            /////
-    delegate void ProgressBarUpdaterDelegate(int progressPrcnt);              /////
-    delegate void PictureBoxUpdaterDelegate(PictureBox pctrbox, Color color); /////
+    delegate void LabelUpdaterDelegate(Label lbl, string lblText);            
+    delegate void PictureBoxUpdaterDelegate(PictureBox pctrbox, Color color); 
 
 
     public partial class Form1 : Form
     {
-        List<UInt16> buferU16 = new List<UInt16>();               // БУФЕР UINT16
-        List<byte> buferWithoutPreambula = new List<byte>();      // БУФЕР BYTE БЕЗ АМБУЛЫ И ПРЕАМБУЛЫ  
-        List<byte> buferIncoming = new List<byte>();              // БУФЕР BYTE ВХОДНЫХ ДАННЫХ   
+        // буфер UInt16
+        List<UInt16> buferU16 = new List<UInt16>();
 
-        List<double> currentGraphY = new List<double>();          // МАССИВ ТОЧЕК ПО ОСИ У ТЕКУЩЕГО ВЫВОДИМОГО ГРАФИКА
+        // буфер входных данных без амбулы и преамбулы                 
+        List<byte> buferWithoutPreambula = new List<byte>();
+
+        // буфер входных данных с амбулой и преамбулой   
+        List<byte> buferIncoming = new List<byte>();
+
+        // массив точек по оси У текущего выводимого графика
+        List<double> currentGraphY = new List<double>();          
 
         List<double> filteredCurrentGraph = new List<double>();
-
         List<double> sinusoida = new List<double>();
 
-        const int buferIncomingSize = 4000; //32008;                      // РАЗМЕР ВХОДНОГО БУФЕРА COM ПОРТА 
+        // размер входного буфера в байтах 
+        const int buferIncomingSize = 4000; //32008;                      
 
         ////////////
 
