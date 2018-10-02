@@ -215,7 +215,6 @@
             this.chkbxIsGraphNormalized.TabIndex = 39;
             this.chkbxIsGraphNormalized.Text = "Нормировать выводимый график\r\nотносительно 2.5 В";
             this.chkbxIsGraphNormalized.UseVisualStyleBackColor = true;
-            this.chkbxIsGraphNormalized.CheckedChanged += new System.EventHandler(this.chkbxIsGraphNormalized_CheckedChanged);
             // 
             // btnDeleteChosenGraph
             // 
