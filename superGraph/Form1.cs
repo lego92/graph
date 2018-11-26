@@ -277,7 +277,10 @@ namespace superGraph
                 cmbPort.Items.Add(port);
             }
 
-            cmbPort.SelectedIndex = 0;
+            if (ports.Length != 0)
+            {
+                cmbPort.SelectedIndex = 0;
+            }            
         }
 
         private void btnRefreshPortsList_Click(object sender, EventArgs e)
