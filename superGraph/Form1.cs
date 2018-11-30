@@ -16,7 +16,7 @@ namespace superGraph
     public partial class Form1 : Form
     {
         // буфер UInt16
-        List<UInt16> buferU16 = new List<UInt16>();
+        List<ushort> buferU16 = new List<ushort>();
 
         // буфер входных данных без амбулы и преамбулы                 
         List<byte> buferWithoutPreambula = new List<byte>();
@@ -219,13 +219,11 @@ namespace superGraph
         {
             if (serialPort1.IsOpen && serialPort1.ReadBufferSize != 0)
             {
-                UInt16 x;
+                ushort x;
 
-                int size = serialPort1.BytesToRead;
+                int bufferSize = serialPort1.BytesToRead;
 
-                buferIncoming.Clear();
-
-                buferWithoutPreambula.Clear();
+                buferIncoming.Clear();                
 
                 LabelUpdater(lblRecieve, "Прием данных из COM порта");
 
@@ -233,7 +231,7 @@ namespace superGraph
 
                 try
                 {
-                    for (int i = 0; i < size; i++)
+                    for (int i = 0; i < bufferSize; i++)
                     {
                         buferIncoming.Add((byte)serialPort1.ReadByte());
                     }
@@ -311,7 +309,7 @@ namespace superGraph
 
         private void btnCreateSecondChartArea_Click(object sender, EventArgs e)
         {
-            if (dataChart.ChartAreas.Count != 2)
+            if (dataChart.ChartAreas.Count < 2)
             {
                 dataChart.ChartAreas.Add("ChartArea2");
                 dataChart.ChartAreas["ChartArea2"].AxisX.IsMarginVisible = false;
@@ -333,7 +331,13 @@ namespace superGraph
         {
             if (dataChart.ChartAreas.Count == 2)
             {
+                foreach (var item in )
+                {
+
+                }
+
                 dataChart.ChartAreas.RemoveAt(1);
+
                 cmbChartAreaChoice.Items.RemoveAt(1);
 
                 UpdateGraphsComboBox();
@@ -347,8 +351,11 @@ namespace superGraph
             if (cmbDeleteGraphChoise.Text != "")
             {
                 bool format = true;
+
                 string delGraphChartAreaName = dataChart.Series[cmbDeleteGraphChoise.Text].ChartArea;
+
                 dataChart.Series.Remove(dataChart.Series[cmbDeleteGraphChoise.Text]);
+
                 foreach (Series serie in dataChart.Series)
                 {
                     if (serie.ChartArea == delGraphChartAreaName)
