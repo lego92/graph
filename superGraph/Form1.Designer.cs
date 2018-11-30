@@ -58,6 +58,8 @@
             this.checkBoxSelectFileData = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblSampleTimeText = new System.Windows.Forms.Label();
+            this.txtbxSampleTime = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctrbxDataRecivingIndicator)).BeginInit();
             this.SuspendLayout();
@@ -65,8 +67,8 @@
             // dataChart
             // 
             chartArea1.AxisX.IsMarginVisible = false;
-            chartArea1.AxisX.MajorGrid.Interval = 0.1D;
-            chartArea1.AxisX.MajorTickMark.Interval = 0.5D;
+            chartArea1.AxisX.MajorGrid.Interval = 0D;
+            chartArea1.AxisX.MajorTickMark.Interval = 0D;
             chartArea1.AxisX.MaximumAutoSize = 25F;
             chartArea1.BackColor = System.Drawing.Color.WhiteSmoke;
             chartArea1.BackSecondaryColor = System.Drawing.Color.White;
@@ -101,11 +103,10 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "Text file(*.txt)|*.txt";
             // 
             // saveFileDialog1
             // 
-            this.saveFileDialog1.Filter = "Text file(*.txt)|*.txt";
+            this.saveFileDialog1.Filter = "Файл осциллограммы(*.eao)|*.eao";
             // 
             // serialPort1
             // 
@@ -182,7 +183,7 @@
             // 
             this.cmbChartAreaChoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmbChartAreaChoice.FormattingEnabled = true;
-            this.cmbChartAreaChoice.Location = new System.Drawing.Point(316, 811);
+            this.cmbChartAreaChoice.Location = new System.Drawing.Point(311, 802);
             this.cmbChartAreaChoice.Name = "cmbChartAreaChoice";
             this.cmbChartAreaChoice.Size = new System.Drawing.Size(47, 26);
             this.cmbChartAreaChoice.TabIndex = 33;
@@ -201,7 +202,7 @@
             // txtBoxGraphName
             // 
             this.txtBoxGraphName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtBoxGraphName.Location = new System.Drawing.Point(378, 813);
+            this.txtBoxGraphName.Location = new System.Drawing.Point(378, 802);
             this.txtBoxGraphName.Name = "txtBoxGraphName";
             this.txtBoxGraphName.Size = new System.Drawing.Size(145, 24);
             this.txtBoxGraphName.TabIndex = 38;
@@ -210,11 +211,11 @@
             // 
             this.chkbxIsGraphNormalized.AutoSize = true;
             this.chkbxIsGraphNormalized.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.chkbxIsGraphNormalized.Location = new System.Drawing.Point(316, 871);
+            this.chkbxIsGraphNormalized.Location = new System.Drawing.Point(174, 848);
             this.chkbxIsGraphNormalized.Name = "chkbxIsGraphNormalized";
-            this.chkbxIsGraphNormalized.Size = new System.Drawing.Size(218, 40);
+            this.chkbxIsGraphNormalized.Size = new System.Drawing.Size(268, 40);
             this.chkbxIsGraphNormalized.TabIndex = 39;
-            this.chkbxIsGraphNormalized.Text = "Нормировать выводимый \r\nграфик относительно 2.5 В";
+            this.chkbxIsGraphNormalized.Text = "Нормировать выводимый график \r\nотносительно 2.5 В";
             this.chkbxIsGraphNormalized.UseVisualStyleBackColor = true;
             // 
             // btnDeleteChosenGraph
@@ -261,9 +262,9 @@
             // 
             this.btnSaveBufferToTextFile.Enabled = false;
             this.btnSaveBufferToTextFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSaveBufferToTextFile.Location = new System.Drawing.Point(29, 826);
+            this.btnSaveBufferToTextFile.Location = new System.Drawing.Point(29, 848);
             this.btnSaveBufferToTextFile.Name = "btnSaveBufferToTextFile";
-            this.btnSaveBufferToTextFile.Size = new System.Drawing.Size(221, 94);
+            this.btnSaveBufferToTextFile.Size = new System.Drawing.Size(124, 88);
             this.btnSaveBufferToTextFile.TabIndex = 46;
             this.btnSaveBufferToTextFile.Text = "Сохранить буфер в текстовый файл";
             this.btnSaveBufferToTextFile.UseVisualStyleBackColor = true;
@@ -284,11 +285,11 @@
             // 
             this.lblCountOfValues.AutoSize = true;
             this.lblCountOfValues.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblCountOfValues.Location = new System.Drawing.Point(1388, 794);
+            this.lblCountOfValues.Location = new System.Drawing.Point(1390, 781);
             this.lblCountOfValues.Name = "lblCountOfValues";
-            this.lblCountOfValues.Size = new System.Drawing.Size(159, 18);
+            this.lblCountOfValues.Size = new System.Drawing.Size(151, 36);
             this.lblCountOfValues.TabIndex = 48;
-            this.lblCountOfValues.Text = "Значений в буфере: 0";
+            this.lblCountOfValues.Text = "Значений в буфере: \r\n0";
             // 
             // label3
             // 
@@ -342,11 +343,34 @@
             this.label1.TabIndex = 55;
             this.label1.Text = "|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|";
             // 
+            // lblSampleTimeText
+            // 
+            this.lblSampleTimeText.AutoSize = true;
+            this.lblSampleTimeText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblSampleTimeText.Location = new System.Drawing.Point(170, 906);
+            this.lblSampleTimeText.Name = "lblSampleTimeText";
+            this.lblSampleTimeText.Size = new System.Drawing.Size(237, 20);
+            this.lblSampleTimeText.TabIndex = 56;
+            this.lblSampleTimeText.Text = "Интервал дискретизации(мс):";
+            // 
+            // txtbxSampleTime
+            // 
+            this.txtbxSampleTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtbxSampleTime.Location = new System.Drawing.Point(413, 903);
+            this.txtbxSampleTime.Name = "txtbxSampleTime";
+            this.txtbxSampleTime.Size = new System.Drawing.Size(128, 26);
+            this.txtbxSampleTime.TabIndex = 57;
+            this.txtbxSampleTime.Text = "1,25";
+            this.txtbxSampleTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbxSampleTime_KeyPress);
+            this.txtbxSampleTime.Validating += new System.ComponentModel.CancelEventHandler(this.txtbxSampleTime_Validating);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1571, 948);
+            this.Controls.Add(this.txtbxSampleTime);
+            this.Controls.Add(this.lblSampleTimeText);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.checkBoxSelectFileData);
@@ -413,6 +437,8 @@
         private System.Windows.Forms.CheckBox checkBoxSelectFileData;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblSampleTimeText;
+        private System.Windows.Forms.TextBox txtbxSampleTime;
     }
 }
 
