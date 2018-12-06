@@ -10,11 +10,17 @@ using System.Text.RegularExpressions;
 
 namespace superGraph
 {
-    delegate void LabelUpdaterDelegate(Label lbl, string lblText);
-    delegate void PictureBoxUpdaterDelegate(PictureBox pctrbox, Color color);
+
+    //delegate void LabelUpdaterDelegate(Label lbl, string lblText);
+    //delegate void PictureBoxUpdaterDelegate(PictureBox pctrbox, Color color);
+    delegate void UpdaterDelegate<A, B>(A controlType, B valueType);
 
     public partial class Form1 : Form
     {
+        public string GraphName { get; set; }
+        public int ChartArea { get; set; }
+
+        List<Graph> Graphs = new List<Graph>();
         // буфер UInt16
         List<ushort> buferU16 = new List<ushort>();
 
@@ -53,150 +59,124 @@ namespace superGraph
             // вывод из файла
             if (checkBoxSelectFileData.Checked)
             {
-                if (dataChart.Series.Contains(dataChart.Series.FindByName(txtBoxGraphName.Text)))
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show("График с таким названием уже существует!", "Ошибка");
-                }
-                else
-                {
-                    if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                    Form2 f = new Form2(dataChart.ChartAreas.Count, this);
+
+                    f.ShowDialog();
+
+                    Graph currentGraph = CreateNewGraph(GraphName, ChartArea);
+
+                    StreamReader streamReader = new StreamReader(openFileDialog1.FileName);
+
+                    double res = 1;
+
+                    while (!streamReader.EndOfStream)
                     {
-                        dataChart.Series.Add(txtBoxGraphName.Text);
-                        dataChart.Series[txtBoxGraphName.Text].ChartType = SeriesChartType.Line;
-                        dataChart.Series[txtBoxGraphName.Text].Legend = "Legend1";
-                        dataChart.Series[txtBoxGraphName.Text].LegendText = txtBoxGraphName.Text;
-                        dataChart.Series[txtBoxGraphName.Text].ChartArea = "ChartArea" + cmbChartAreaChoice.Text;
+                        string currentString = streamReader.ReadLine();
 
-                        UpdateGraphsComboBox();
-
-                        StreamReader streamReader = new StreamReader(openFileDialog1.FileName);
-
-                        double x = 0.0;
-
-                        double res = 1;
-
-                        double multiplier = 1;
-
-                        if (chkbxIsGraphNormalized.Checked)
+                        if (currentString.Contains("Sample Time"))
                         {
-                            multiplier = amplVoltage / maxADC;
+                            currentString = Regex.Replace(currentString, "[^0-9.]", "");
+                            currentGraph.SampleTime = Convert.ToDouble(currentString);
                         }
-
-                        while (!streamReader.EndOfStream)
+                        else if (Double.TryParse(currentString, out res))
                         {
-                            string current = streamReader.ReadLine();
-
-                            if (current.Contains("Sample Time"))
-                            {
-                                current = Regex.Replace(current, "[^0-9.]", "");
-                                sampleTime = Convert.ToDouble(current);
-                                txtbxSampleTime.Text = current;
-                            }
-                            else if (Double.TryParse(current, out res))
-                            {
-                                double y = Convert.ToDouble(streamReader.ReadLine());
-                                y = y * multiplier;
-                                dataChart.Series[txtBoxGraphName.Text].Points.AddXY(Math.Round(x, 5), Math.Round(y, 4));
-                                x += sampleTime;
-                            }
+                            double y = Convert.ToDouble(currentString);
+                            WriteToGraph(currentGraph, Math.Round(y, 4));
                         }
-                        streamReader.Close();
-
-                        // форматирование относительно yMax и yMin
-                        DataPoint a = dataChart.Series[txtBoxGraphName.Text].Points.FindMaxByValue("Y1");
-                        yMax = (double)a.YValues.GetValue(0);
-                        a = dataChart.Series[txtBoxGraphName.Text].Points.FindMinByValue("Y1");
-                        yMin = (double)a.YValues.GetValue(0);
-
-                        FormatGraph(yMax, yMin, sampleTime, "ChartArea" + cmbChartAreaChoice.Text);
                     }
+                    streamReader.Close();
+
+                    AddAndShowSeries(currentGraph);
+
+                    // форматирование относительно yMax и yMin  
+                    FormatGraph(currentGraph);
                 }
             }
             // вывод из буфера
             else if (checkBoxSelectBufferData.Checked)
             {
-                if (buferU16.Count == 0)
+                Graph currentGraph = CreateNewGraph(GraphName, ChartArea);
+
+                for (int i = 0; i < buferU16.Count; i++)
                 {
-                    MessageBox.Show("Буфер пуст!", "Ошибка");
+                    double y = Convert.ToDouble(buferU16[i]);
+                    WriteToGraph(currentGraph, Math.Round(y, 4));
                 }
-                else
-                {
-                    if (dataChart.Series.Contains(dataChart.Series.FindByName(txtBoxGraphName.Text)))
-                    {
-                        MessageBox.Show("График с таким названием уже существует!", "Ошибка");
-                    }
-                    else
-                    {
-                        dataChart.Series.Add(txtBoxGraphName.Text);
-                        dataChart.Series[txtBoxGraphName.Text].ChartType = SeriesChartType.Line;
-                        dataChart.Series[txtBoxGraphName.Text].Legend = "Legend1";
-                        dataChart.Series[txtBoxGraphName.Text].LegendText = txtBoxGraphName.Text;
-                        dataChart.Series[txtBoxGraphName.Text].ChartArea = "ChartArea" + cmbChartAreaChoice.Text;
 
-                        UpdateGraphsComboBox();
+                AddAndShowSeries(currentGraph);
 
-                        double x = 0.0;
-
-                        double multiplier = 1;
-
-                        if (chkbxIsGraphNormalized.Checked)
-                        {
-                            multiplier = amplVoltage / maxADC;
-                        }
-
-                        for (int i = 0; i < buferU16.Count; i++)
-                        {
-                            double y = Convert.ToDouble(buferU16[i]);
-                            y = y * multiplier;
-                            dataChart.Series[txtBoxGraphName.Text].Points.AddXY(Math.Round(x, 4), Math.Round(y, 4));
-                            x += sampleTime;
-                        }
-
-                        // форматирование относительно yMax и yMin
-                        DataPoint a = dataChart.Series[txtBoxGraphName.Text].Points.FindMaxByValue("Y1");
-                        yMax = (double)a.YValues.GetValue(0);
-                        a = dataChart.Series[txtBoxGraphName.Text].Points.FindMinByValue("Y1");
-                        yMin = (double)a.YValues.GetValue(0);
-
-                        FormatGraph(yMax, yMin, sampleTime, "ChartArea" + cmbChartAreaChoice.Text);
-
-                    }
-                }
+                // форматирование относительно yMax и yMin
+                FormatGraph(currentGraph);
             }
         }
 
-        private void FormatGraph(double ymax, double ymin, double stepX, string chartAreaName)
+        private Graph CreateNewGraph(string name, int chartArea)
         {
-            // включить возможность выделения курсором области по оси X
-            dataChart.ChartAreas[chartAreaName].CursorX.IsUserSelectionEnabled = true;
-            // минимальный интервал зума курсора по оси X      
-            dataChart.ChartAreas[chartAreaName].CursorX.Interval = stepX;
-            // включить возможность зума по оси X                      
-            dataChart.ChartAreas[chartAreaName].AxisX.ScaleView.Zoomable = true;
-            // включить панель прокрутки по оси X            
-            dataChart.ChartAreas[chartAreaName].AxisX.ScrollBar.IsPositionedInside = true;
-            // шаг панели прокрутки по оси X   
-            dataChart.ChartAreas[chartAreaName].AxisX.ScaleView.SmallScrollSize = 0.2;
+            return new Graph(name, chartArea);
+        }
 
-            if (ymax >= dataChart.ChartAreas[chartAreaName].AxisY.Maximum ||
-                                  double.IsNaN(dataChart.ChartAreas[chartAreaName].AxisY.Maximum))
+        private void WriteToGraph(Graph graph, double value)
+        {
+            graph.Samples.Add(value);
+        }
+
+        private void AddAndShowSeries(Graph graph)
+        {
+            dataChart.Series.Add(graph.Name);
+            dataChart.Series[graph.Name].ChartType = SeriesChartType.Line;
+            dataChart.Series[graph.Name].Legend = "Legend1";
+            dataChart.Series[graph.Name].LegendText = graph.Name;
+            dataChart.Series[graph.Name].ChartArea = "ChartArea" + graph.ChartArea;
+
+            double x = 0.0;
+
+            for (int i = 0; i < graph.Samples.Count; i++)
+            {
+                dataChart.Series[graph.Name].Points.AddXY(Math.Round(x, 5), graph.Samples[i]);
+                x += graph.SampleTime;
+            }
+        }
+
+        private void FormatGraph(Graph graph)
+        {
+
+            DataPoint a = dataChart.Series[graph.Name].Points.FindMaxByValue("Y1");
+            yMax = (double)a.YValues.GetValue(0);
+            a = dataChart.Series[graph.Name].Points.FindMinByValue("Y1");
+            yMin = (double)a.YValues.GetValue(0);
+
+            // включить возможность выделения курсором области по оси X
+            dataChart.ChartAreas[graph.ChartArea].CursorX.IsUserSelectionEnabled = true;
+            // минимальный интервал зума курсора по оси X      
+            dataChart.ChartAreas[graph.ChartArea].CursorX.Interval = graph.SampleTime;
+            // включить возможность зума по оси X                      
+            dataChart.ChartAreas[graph.ChartArea].AxisX.ScaleView.Zoomable = true;
+            // включить панель прокрутки по оси X            
+            dataChart.ChartAreas[graph.ChartArea].AxisX.ScrollBar.IsPositionedInside = true;
+            // шаг панели прокрутки по оси X   
+            dataChart.ChartAreas[graph.ChartArea].AxisX.ScaleView.SmallScrollSize = 0.2;
+
+            if (yMax >= dataChart.ChartAreas[graph.ChartArea].AxisY.Maximum ||
+                                  double.IsNaN(dataChart.ChartAreas[graph.ChartArea].AxisY.Maximum))
             {
                 // нижняя граница отображения по оси Y 
-                dataChart.ChartAreas[chartAreaName].AxisY.Maximum = ymax;
+                dataChart.ChartAreas[graph.ChartArea].AxisY.Maximum = yMax;
             }
-            if (ymin <= dataChart.ChartAreas[chartAreaName].AxisY.Minimum ||
-                                  double.IsNaN(dataChart.ChartAreas[chartAreaName].AxisY.Minimum))
+            if (yMin <= dataChart.ChartAreas[graph.ChartArea].AxisY.Minimum ||
+                                  double.IsNaN(dataChart.ChartAreas[graph.ChartArea].AxisY.Minimum))
             {
                 // верхняя граница отображения по оси Y 
-                dataChart.ChartAreas[chartAreaName].AxisY.Minimum = ymin;
+                dataChart.ChartAreas[graph.ChartArea].AxisY.Minimum = yMin;
             }
 
             // аналогично с осью X
-            dataChart.ChartAreas[chartAreaName].CursorY.IsUserSelectionEnabled = true;
-            dataChart.ChartAreas[chartAreaName].CursorY.Interval = 0.005;
-            dataChart.ChartAreas[chartAreaName].AxisY.ScaleView.Zoomable = true;
-            dataChart.ChartAreas[chartAreaName].AxisY.ScrollBar.IsPositionedInside = true;
-            dataChart.ChartAreas[chartAreaName].AxisY.ScaleView.SmallScrollSize = 0.005;
+            dataChart.ChartAreas[graph.ChartArea].CursorY.IsUserSelectionEnabled = true;
+            dataChart.ChartAreas[graph.ChartArea].CursorY.Interval = 0.005;
+            dataChart.ChartAreas[graph.ChartArea].AxisY.ScaleView.Zoomable = true;
+            dataChart.ChartAreas[graph.ChartArea].AxisY.ScrollBar.IsPositionedInside = true;
+            dataChart.ChartAreas[graph.ChartArea].AxisY.ScaleView.SmallScrollSize = 0.005;
         }
 
         private void ResetFormat(string chartAreaName)
@@ -223,7 +203,7 @@ namespace superGraph
 
                 int bufferSize = serialPort1.BytesToRead;
 
-                buferIncoming.Clear();                
+                buferIncoming.Clear();
 
                 LabelUpdater(lblRecieve, "Прием данных из COM порта");
 
@@ -262,7 +242,7 @@ namespace superGraph
 
             if (label.InvokeRequired)
             {
-                LabelUpdaterDelegate d = new LabelUpdaterDelegate(LabelUpdater);
+                UpdaterDelegate<Label, string> d = new UpdaterDelegate<Label, string>(LabelUpdater);
                 this.Invoke(d, new object[] { label, labelText });
             }
             else
@@ -273,10 +253,9 @@ namespace superGraph
 
         private void PictureBoxUpdater(PictureBox pctrbox, Color color)
         {
-
             if (pctrbox.InvokeRequired)
             {
-                PictureBoxUpdaterDelegate d = new PictureBoxUpdaterDelegate(PictureBoxUpdater);
+                UpdaterDelegate<PictureBox, Color> d = new UpdaterDelegate<PictureBox, Color>(PictureBoxUpdater);
                 this.Invoke(d, new object[] { pctrbox, color });
             }
             else
@@ -331,9 +310,19 @@ namespace superGraph
         {
             if (dataChart.ChartAreas.Count == 2)
             {
-                foreach (var item in )
-                {
+                List<int> indexesOfSeries = new List<int>();
 
+                foreach (Series series in dataChart.Series)
+                {
+                    if (series.ChartArea == dataChart.ChartAreas[1].Name)
+                    {
+                        indexesOfSeries.Add(dataChart.Series.IndexOf(series));
+                    }
+                }
+
+                foreach (int indexOfSeries in indexesOfSeries)
+                {
+                    dataChart.Series.RemoveAt(indexOfSeries);
                 }
 
                 dataChart.ChartAreas.RemoveAt(1);
@@ -367,7 +356,7 @@ namespace superGraph
 
                 if (format)
                 {
-                    ResetFormat(delGraphChartAreaName);                    
+                    ResetFormat(delGraphChartAreaName);
                 }
 
                 UpdateGraphsComboBox();
