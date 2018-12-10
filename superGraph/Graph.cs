@@ -9,25 +9,36 @@ namespace superGraph
     class Graph
     {
         public string Name { get; set; }
-        public int ChartArea { get; set; }
+        public string ChartArea { get; set; }
 
-        public double SampleTime { get; set; }
+        double sampleTime;
+        public double SampleTime
+        {
+            get
+            {
+                return sampleTime;
+            }
+            set
+            {
+                sampleTime = value * 1e-3;
+            }
+        }
 
-        public List<double> Samples { get; set; }
+        public List<double> Samples { get; set; }       
 
-
-
-        //public double this[int index]
-        //{
-        //    get { return samples[index]; }
-        //    set { samples[index] = value; }
-        //}
-
-        public Graph(string name, int chartArea)
+        public Graph(string name, string chartArea)
         {
             Name = name;
             ChartArea = chartArea;
-            SampleTime = 1.25 * 1e-3;
+            SampleTime = 1.25;
+            Samples = new List<double>();
+        }
+
+        public Graph(string name, string chartArea, double sampleTime)
+        {
+            Name = name;
+            ChartArea = chartArea;
+            SampleTime = sampleTime;
             Samples = new List<double>();
         }
     }

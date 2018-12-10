@@ -13,26 +13,23 @@ namespace superGraph
     public partial class Form2 : Form
     {
         Form1 ff;
-        public Form2(int count, Form1 f)
+        public Form2(int chartAreasCount, int seriesCount, Form1 f)
         {
             InitializeComponent();
             ff = f;
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < chartAreasCount; i++)
             {
-                comboBox1.Items.Add(i+1);
+                cmbbxChartArea.Items.Add(i + 1);
             }
-            comboBox1.SelectedIndex = 0;
+            cmbbxChartArea.SelectedIndex = 0;
+
+            txtbxGraphName.Text = "Без названия" + (int)(seriesCount + 1);
         }
 
-        public void GetValues(ref string name, ref int chartAreaNumber)
+        private void btnOk_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ff.GraphName = textBox1.Text;
-            ff.ChartArea = comboBox1.SelectedIndex + 1;
+            ff.GraphName = txtbxGraphName.Text;
+            ff.ChartArea = "ChartArea" + (int)(cmbbxChartArea.SelectedIndex + 1);
             this.Close();
         }
     }
