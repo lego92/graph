@@ -293,7 +293,7 @@ namespace superGraph
             lblSampleTimeText.Focus();
             double result;
             bool isParsed = Double.TryParse(textbox.Text, out result);
-            sampleTime = result * 1e-3;
+            sampleTime = result;
         }
 
         public void OnDataReceived(object sender, SerialDataReceivedEventArgs e)
