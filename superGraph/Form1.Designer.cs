@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.dataChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnShowDataFrom = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -62,23 +62,23 @@
             // 
             // dataChart
             // 
-            chartArea5.AxisX.IsMarginVisible = false;
-            chartArea5.AxisX.MajorGrid.Interval = 0D;
-            chartArea5.AxisX.MajorTickMark.Interval = 0D;
-            chartArea5.AxisX.MaximumAutoSize = 25F;
-            chartArea5.BackColor = System.Drawing.Color.WhiteSmoke;
-            chartArea5.BackSecondaryColor = System.Drawing.Color.White;
-            chartArea5.CursorX.Interval = 0.00125D;
-            chartArea5.InnerPlotPosition.Auto = false;
-            chartArea5.InnerPlotPosition.Height = 90F;
-            chartArea5.InnerPlotPosition.Width = 90F;
-            chartArea5.InnerPlotPosition.X = 10F;
-            chartArea5.IsSameFontSizeForAllAxes = true;
-            chartArea5.Name = "ChartArea1";
-            this.dataChart.ChartAreas.Add(chartArea5);
+            chartArea6.AxisX.IsMarginVisible = false;
+            chartArea6.AxisX.MajorGrid.Interval = 0D;
+            chartArea6.AxisX.MajorTickMark.Interval = 0D;
+            chartArea6.AxisX.MaximumAutoSize = 25F;
+            chartArea6.BackColor = System.Drawing.Color.WhiteSmoke;
+            chartArea6.BackSecondaryColor = System.Drawing.Color.White;
+            chartArea6.CursorX.Interval = 0.00125D;
+            chartArea6.InnerPlotPosition.Auto = false;
+            chartArea6.InnerPlotPosition.Height = 90F;
+            chartArea6.InnerPlotPosition.Width = 90F;
+            chartArea6.InnerPlotPosition.X = 10F;
+            chartArea6.IsSameFontSizeForAllAxes = true;
+            chartArea6.Name = "ChartArea1";
+            this.dataChart.ChartAreas.Add(chartArea6);
             this.dataChart.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            legend5.Name = "Legend1";
-            this.dataChart.Legends.Add(legend5);
+            legend6.Name = "Legend1";
+            this.dataChart.Legends.Add(legend6);
             this.dataChart.Location = new System.Drawing.Point(12, 12);
             this.dataChart.Name = "dataChart";
             this.dataChart.Size = new System.Drawing.Size(1533, 687);
@@ -99,6 +99,7 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Файл осциллограммы(*.eao)|*.eao";
             // 
             // saveFileDialog1
             // 

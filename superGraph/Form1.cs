@@ -39,7 +39,7 @@ namespace superGraph
         const double maxADC = 4095;
 
         //
-        double sampleTime = 1.25e-3;
+        double sampleTime = 1.25;
 
         bool enter = false;
 
