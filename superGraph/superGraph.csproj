@@ -126,6 +126,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="kisspng-digital-storage-oscilloscope-scalable-vector-graph-5b6678be334712.0020635015334422382101.ico" />
+    <None Include="Resources\utilities-system-monitor.png" />
+    <None Include="Resources\Gnome-View-Refresh-64.jpg" />
+    <None Include="Resources\Gnome-View-Refresh-64 %281%29.jpg" />
+    <None Include="Resources\Gnome-View-Refresh-64 %282%29.jpg" />
+    <None Include="Resources\reload_refresh.jpg" />
     <Content Include="utilities-system-monitor %282%29.ico" />
     <Content Include="utilities-system-monitor.ico" />
   </ItemGroup>

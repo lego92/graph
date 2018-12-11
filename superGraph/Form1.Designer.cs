@@ -40,12 +40,10 @@
             this.btnOpenPort = new System.Windows.Forms.Button();
             this.btnClosePort = new System.Windows.Forms.Button();
             this.cmbPorts = new System.Windows.Forms.ComboBox();
-            this.btnRefreshPortsList = new System.Windows.Forms.Button();
             this.btnCreateSecondChartArea = new System.Windows.Forms.Button();
             this.btnDeleteSecondChartArea = new System.Windows.Forms.Button();
             this.btnDeleteChosenGraph = new System.Windows.Forms.Button();
             this.lblRecieve = new System.Windows.Forms.Label();
-            this.pctrbxDataRecivingIndicator = new System.Windows.Forms.PictureBox();
             this.btnSaveBufferToTextFile = new System.Windows.Forms.Button();
             this.btnClearBuffer = new System.Windows.Forms.Button();
             this.lblCountOfValues = new System.Windows.Forms.Label();
@@ -57,6 +55,8 @@
             this.lstbxGraphs = new System.Windows.Forms.ListBox();
             this.lblGraphs = new System.Windows.Forms.Label();
             this.lblPorts = new System.Windows.Forms.Label();
+            this.pctrbxDataRecivingIndicator = new System.Windows.Forms.PictureBox();
+            this.btnRefreshPortsList = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctrbxDataRecivingIndicator)).BeginInit();
             this.SuspendLayout();
@@ -82,16 +82,16 @@
             this.dataChart.Legends.Add(legend1);
             this.dataChart.Location = new System.Drawing.Point(12, 12);
             this.dataChart.Name = "dataChart";
-            this.dataChart.Size = new System.Drawing.Size(1309, 512);
+            this.dataChart.Size = new System.Drawing.Size(1309, 603);
             this.dataChart.TabIndex = 0;
             this.dataChart.Text = "dataChart";
             // 
             // btnShowDataFrom
             // 
-            this.btnShowDataFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnShowDataFrom.Location = new System.Drawing.Point(12, 547);
+            this.btnShowDataFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnShowDataFrom.Location = new System.Drawing.Point(10, 624);
             this.btnShowDataFrom.Name = "btnShowDataFrom";
-            this.btnShowDataFrom.Size = new System.Drawing.Size(139, 68);
+            this.btnShowDataFrom.Size = new System.Drawing.Size(139, 38);
             this.btnShowDataFrom.TabIndex = 1;
             this.btnShowDataFrom.Text = "Отобразить данные на графике";
             this.btnShowDataFrom.UseVisualStyleBackColor = true;
@@ -114,10 +114,10 @@
             // 
             // btnOpenPort
             // 
-            this.btnOpenPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnOpenPort.Location = new System.Drawing.Point(1143, 607);
+            this.btnOpenPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btnOpenPort.Location = new System.Drawing.Point(1222, 624);
             this.btnOpenPort.Name = "btnOpenPort";
-            this.btnOpenPort.Size = new System.Drawing.Size(178, 44);
+            this.btnOpenPort.Size = new System.Drawing.Size(99, 38);
             this.btnOpenPort.TabIndex = 12;
             this.btnOpenPort.Text = "Открыть порт";
             this.btnOpenPort.UseVisualStyleBackColor = true;
@@ -126,10 +126,10 @@
             // btnClosePort
             // 
             this.btnClosePort.Enabled = false;
-            this.btnClosePort.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnClosePort.Location = new System.Drawing.Point(1143, 663);
+            this.btnClosePort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btnClosePort.Location = new System.Drawing.Point(1222, 668);
             this.btnClosePort.Name = "btnClosePort";
-            this.btnClosePort.Size = new System.Drawing.Size(178, 46);
+            this.btnClosePort.Size = new System.Drawing.Size(99, 38);
             this.btnClosePort.TabIndex = 13;
             this.btnClosePort.Text = "Закрыть порт";
             this.btnClosePort.UseVisualStyleBackColor = true;
@@ -137,30 +137,19 @@
             // 
             // cmbPorts
             // 
-            this.cmbPorts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmbPorts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.cmbPorts.FormattingEnabled = true;
-            this.cmbPorts.Location = new System.Drawing.Point(996, 577);
+            this.cmbPorts.Location = new System.Drawing.Point(1066, 652);
             this.cmbPorts.Name = "cmbPorts";
-            this.cmbPorts.Size = new System.Drawing.Size(109, 28);
+            this.cmbPorts.Size = new System.Drawing.Size(122, 23);
             this.cmbPorts.TabIndex = 29;
-            // 
-            // btnRefreshPortsList
-            // 
-            this.btnRefreshPortsList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnRefreshPortsList.Location = new System.Drawing.Point(1143, 547);
-            this.btnRefreshPortsList.Name = "btnRefreshPortsList";
-            this.btnRefreshPortsList.Size = new System.Drawing.Size(178, 48);
-            this.btnRefreshPortsList.TabIndex = 30;
-            this.btnRefreshPortsList.Text = "Обновить список доступных портов";
-            this.btnRefreshPortsList.UseVisualStyleBackColor = true;
-            this.btnRefreshPortsList.Click += new System.EventHandler(this.btnRefreshPortsList_Click);
             // 
             // btnCreateSecondChartArea
             // 
-            this.btnCreateSecondChartArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnCreateSecondChartArea.Location = new System.Drawing.Point(781, 603);
+            this.btnCreateSecondChartArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnCreateSecondChartArea.Location = new System.Drawing.Point(903, 624);
             this.btnCreateSecondChartArea.Name = "btnCreateSecondChartArea";
-            this.btnCreateSecondChartArea.Size = new System.Drawing.Size(189, 48);
+            this.btnCreateSecondChartArea.Size = new System.Drawing.Size(136, 40);
             this.btnCreateSecondChartArea.TabIndex = 31;
             this.btnCreateSecondChartArea.Text = "Добавить вторую область построения";
             this.btnCreateSecondChartArea.UseVisualStyleBackColor = true;
@@ -168,10 +157,10 @@
             // 
             // btnDeleteSecondChartArea
             // 
-            this.btnDeleteSecondChartArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnDeleteSecondChartArea.Location = new System.Drawing.Point(781, 659);
+            this.btnDeleteSecondChartArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnDeleteSecondChartArea.Location = new System.Drawing.Point(903, 665);
             this.btnDeleteSecondChartArea.Name = "btnDeleteSecondChartArea";
-            this.btnDeleteSecondChartArea.Size = new System.Drawing.Size(189, 50);
+            this.btnDeleteSecondChartArea.Size = new System.Drawing.Size(136, 41);
             this.btnDeleteSecondChartArea.TabIndex = 32;
             this.btnDeleteSecondChartArea.Text = "Удалить вторую область построения";
             this.btnDeleteSecondChartArea.UseVisualStyleBackColor = true;
@@ -179,10 +168,10 @@
             // 
             // btnDeleteChosenGraph
             // 
-            this.btnDeleteChosenGraph.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnDeleteChosenGraph.Location = new System.Drawing.Point(781, 547);
+            this.btnDeleteChosenGraph.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnDeleteChosenGraph.Location = new System.Drawing.Point(768, 666);
             this.btnDeleteChosenGraph.Name = "btnDeleteChosenGraph";
-            this.btnDeleteChosenGraph.Size = new System.Drawing.Size(189, 48);
+            this.btnDeleteChosenGraph.Size = new System.Drawing.Size(135, 40);
             this.btnDeleteChosenGraph.TabIndex = 40;
             this.btnDeleteChosenGraph.Text = "Удалить выбранный график";
             this.btnDeleteChosenGraph.UseVisualStyleBackColor = true;
@@ -191,30 +180,20 @@
             // lblRecieve
             // 
             this.lblRecieve.AutoSize = true;
-            this.lblRecieve.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblRecieve.Location = new System.Drawing.Point(189, 635);
+            this.lblRecieve.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.lblRecieve.Location = new System.Drawing.Point(309, 645);
             this.lblRecieve.Name = "lblRecieve";
-            this.lblRecieve.Size = new System.Drawing.Size(99, 20);
+            this.lblRecieve.Size = new System.Drawing.Size(77, 15);
             this.lblRecieve.TabIndex = 44;
             this.lblRecieve.Text = "Нет приема";
-            // 
-            // pctrbxDataRecivingIndicator
-            // 
-            this.pctrbxDataRecivingIndicator.BackColor = System.Drawing.Color.Red;
-            this.pctrbxDataRecivingIndicator.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pctrbxDataRecivingIndicator.Location = new System.Drawing.Point(165, 637);
-            this.pctrbxDataRecivingIndicator.Name = "pctrbxDataRecivingIndicator";
-            this.pctrbxDataRecivingIndicator.Size = new System.Drawing.Size(18, 18);
-            this.pctrbxDataRecivingIndicator.TabIndex = 45;
-            this.pctrbxDataRecivingIndicator.TabStop = false;
             // 
             // btnSaveBufferToTextFile
             // 
             this.btnSaveBufferToTextFile.Enabled = false;
-            this.btnSaveBufferToTextFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSaveBufferToTextFile.Location = new System.Drawing.Point(12, 621);
+            this.btnSaveBufferToTextFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSaveBufferToTextFile.Location = new System.Drawing.Point(10, 665);
             this.btnSaveBufferToTextFile.Name = "btnSaveBufferToTextFile";
-            this.btnSaveBufferToTextFile.Size = new System.Drawing.Size(139, 88);
+            this.btnSaveBufferToTextFile.Size = new System.Drawing.Size(139, 41);
             this.btnSaveBufferToTextFile.TabIndex = 46;
             this.btnSaveBufferToTextFile.Text = "Сохранить буфер в текстовый файл";
             this.btnSaveBufferToTextFile.UseVisualStyleBackColor = true;
@@ -222,10 +201,10 @@
             // 
             // btnClearBuffer
             // 
-            this.btnClearBuffer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnClearBuffer.Location = new System.Drawing.Point(339, 657);
+            this.btnClearBuffer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btnClearBuffer.Location = new System.Drawing.Point(159, 670);
             this.btnClearBuffer.Name = "btnClearBuffer";
-            this.btnClearBuffer.Size = new System.Drawing.Size(171, 52);
+            this.btnClearBuffer.Size = new System.Drawing.Size(122, 36);
             this.btnClearBuffer.TabIndex = 47;
             this.btnClearBuffer.Text = "Очистить буфер";
             this.btnClearBuffer.UseVisualStyleBackColor = true;
@@ -234,10 +213,10 @@
             // lblCountOfValues
             // 
             this.lblCountOfValues.AutoSize = true;
-            this.lblCountOfValues.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblCountOfValues.Location = new System.Drawing.Point(161, 669);
+            this.lblCountOfValues.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.lblCountOfValues.Location = new System.Drawing.Point(287, 670);
             this.lblCountOfValues.Name = "lblCountOfValues";
-            this.lblCountOfValues.Size = new System.Drawing.Size(166, 40);
+            this.lblCountOfValues.Size = new System.Drawing.Size(126, 30);
             this.lblCountOfValues.TabIndex = 48;
             this.lblCountOfValues.Text = "Значений в буфере: \r\n0";
             // 
@@ -252,10 +231,10 @@
             // checkBoxSelectBufferData
             // 
             this.checkBoxSelectBufferData.AutoSize = true;
-            this.checkBoxSelectBufferData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxSelectBufferData.Location = new System.Drawing.Point(165, 547);
+            this.checkBoxSelectBufferData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBoxSelectBufferData.Location = new System.Drawing.Point(159, 643);
             this.checkBoxSelectBufferData.Name = "checkBoxSelectBufferData";
-            this.checkBoxSelectBufferData.Size = new System.Drawing.Size(107, 24);
+            this.checkBoxSelectBufferData.Size = new System.Drawing.Size(86, 19);
             this.checkBoxSelectBufferData.TabIndex = 50;
             this.checkBoxSelectBufferData.Text = "из буфера";
             this.checkBoxSelectBufferData.UseVisualStyleBackColor = true;
@@ -266,10 +245,10 @@
             this.checkBoxSelectFileData.AutoSize = true;
             this.checkBoxSelectFileData.Checked = true;
             this.checkBoxSelectFileData.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSelectFileData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxSelectFileData.Location = new System.Drawing.Point(165, 581);
+            this.checkBoxSelectFileData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.checkBoxSelectFileData.Location = new System.Drawing.Point(159, 624);
             this.checkBoxSelectFileData.Name = "checkBoxSelectFileData";
-            this.checkBoxSelectFileData.Size = new System.Drawing.Size(101, 24);
+            this.checkBoxSelectFileData.Size = new System.Drawing.Size(81, 19);
             this.checkBoxSelectFileData.TabIndex = 51;
             this.checkBoxSelectFileData.Text = "из файла";
             this.checkBoxSelectFileData.UseVisualStyleBackColor = true;
@@ -278,19 +257,19 @@
             // lblSampleTimeText
             // 
             this.lblSampleTimeText.AutoSize = true;
-            this.lblSampleTimeText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblSampleTimeText.Location = new System.Drawing.Point(335, 548);
+            this.lblSampleTimeText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.lblSampleTimeText.Location = new System.Drawing.Point(427, 639);
             this.lblSampleTimeText.Name = "lblSampleTimeText";
-            this.lblSampleTimeText.Size = new System.Drawing.Size(208, 40);
+            this.lblSampleTimeText.Size = new System.Drawing.Size(159, 30);
             this.lblSampleTimeText.TabIndex = 56;
             this.lblSampleTimeText.Text = "Интервал дискретизации \r\nзначений в буфере (мс):";
             // 
             // txtbxSampleTime
             // 
-            this.txtbxSampleTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtbxSampleTime.Location = new System.Drawing.Point(339, 602);
+            this.txtbxSampleTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.txtbxSampleTime.Location = new System.Drawing.Point(430, 685);
             this.txtbxSampleTime.Name = "txtbxSampleTime";
-            this.txtbxSampleTime.Size = new System.Drawing.Size(128, 26);
+            this.txtbxSampleTime.Size = new System.Drawing.Size(108, 21);
             this.txtbxSampleTime.TabIndex = 57;
             this.txtbxSampleTime.Text = "1,25";
             this.txtbxSampleTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbxSampleTime_KeyPress);
@@ -298,33 +277,54 @@
             // 
             // lstbxGraphs
             // 
-            this.lstbxGraphs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.lstbxGraphs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.lstbxGraphs.FormattingEnabled = true;
-            this.lstbxGraphs.ItemHeight = 16;
-            this.lstbxGraphs.Location = new System.Drawing.Point(570, 577);
+            this.lstbxGraphs.ItemHeight = 15;
+            this.lstbxGraphs.Location = new System.Drawing.Point(611, 642);
             this.lstbxGraphs.Name = "lstbxGraphs";
-            this.lstbxGraphs.Size = new System.Drawing.Size(187, 132);
+            this.lstbxGraphs.Size = new System.Drawing.Size(151, 64);
             this.lstbxGraphs.TabIndex = 58;
             // 
             // lblGraphs
             // 
             this.lblGraphs.AutoSize = true;
-            this.lblGraphs.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblGraphs.Location = new System.Drawing.Point(566, 548);
+            this.lblGraphs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.lblGraphs.Location = new System.Drawing.Point(608, 624);
             this.lblGraphs.Name = "lblGraphs";
-            this.lblGraphs.Size = new System.Drawing.Size(150, 20);
+            this.lblGraphs.Size = new System.Drawing.Size(114, 15);
             this.lblGraphs.TabIndex = 59;
             this.lblGraphs.Text = "Список графиков :";
             // 
             // lblPorts
             // 
             this.lblPorts.AutoSize = true;
-            this.lblPorts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblPorts.Location = new System.Drawing.Point(992, 547);
+            this.lblPorts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.lblPorts.Location = new System.Drawing.Point(1089, 628);
             this.lblPorts.Name = "lblPorts";
-            this.lblPorts.Size = new System.Drawing.Size(129, 20);
+            this.lblPorts.Size = new System.Drawing.Size(99, 15);
             this.lblPorts.TabIndex = 60;
             this.lblPorts.Text = "Список портов :";
+            // 
+            // pctrbxDataRecivingIndicator
+            // 
+            this.pctrbxDataRecivingIndicator.BackColor = System.Drawing.Color.Red;
+            this.pctrbxDataRecivingIndicator.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pctrbxDataRecivingIndicator.Location = new System.Drawing.Point(291, 648);
+            this.pctrbxDataRecivingIndicator.Name = "pctrbxDataRecivingIndicator";
+            this.pctrbxDataRecivingIndicator.Size = new System.Drawing.Size(12, 12);
+            this.pctrbxDataRecivingIndicator.TabIndex = 45;
+            this.pctrbxDataRecivingIndicator.TabStop = false;
+            // 
+            // btnRefreshPortsList
+            // 
+            this.btnRefreshPortsList.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btnRefreshPortsList.Image = global::superGraph.Properties.Resources.reload_refresh;
+            this.btnRefreshPortsList.Location = new System.Drawing.Point(1066, 624);
+            this.btnRefreshPortsList.Name = "btnRefreshPortsList";
+            this.btnRefreshPortsList.Size = new System.Drawing.Size(22, 22);
+            this.btnRefreshPortsList.TabIndex = 30;
+            this.btnRefreshPortsList.UseVisualStyleBackColor = true;
+            this.btnRefreshPortsList.Click += new System.EventHandler(this.btnRefreshPortsList_Click);
             // 
             // Form1
             // 
