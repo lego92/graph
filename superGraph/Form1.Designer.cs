@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.dataChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnShowDataFrom = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -62,23 +62,23 @@
             // 
             // dataChart
             // 
-            chartArea6.AxisX.IsMarginVisible = false;
-            chartArea6.AxisX.MajorGrid.Interval = 0D;
-            chartArea6.AxisX.MajorTickMark.Interval = 0D;
-            chartArea6.AxisX.MaximumAutoSize = 25F;
-            chartArea6.BackColor = System.Drawing.Color.WhiteSmoke;
-            chartArea6.BackSecondaryColor = System.Drawing.Color.White;
-            chartArea6.CursorX.Interval = 0.00125D;
-            chartArea6.InnerPlotPosition.Auto = false;
-            chartArea6.InnerPlotPosition.Height = 90F;
-            chartArea6.InnerPlotPosition.Width = 90F;
-            chartArea6.InnerPlotPosition.X = 10F;
-            chartArea6.IsSameFontSizeForAllAxes = true;
-            chartArea6.Name = "ChartArea1";
-            this.dataChart.ChartAreas.Add(chartArea6);
+            chartArea7.AxisX.IsMarginVisible = false;
+            chartArea7.AxisX.MajorGrid.Interval = 0D;
+            chartArea7.AxisX.MajorTickMark.Interval = 0D;
+            chartArea7.AxisX.MaximumAutoSize = 25F;
+            chartArea7.BackColor = System.Drawing.Color.WhiteSmoke;
+            chartArea7.BackSecondaryColor = System.Drawing.Color.White;
+            chartArea7.CursorX.Interval = 0.00125D;
+            chartArea7.InnerPlotPosition.Auto = false;
+            chartArea7.InnerPlotPosition.Height = 90F;
+            chartArea7.InnerPlotPosition.Width = 90F;
+            chartArea7.InnerPlotPosition.X = 10F;
+            chartArea7.IsSameFontSizeForAllAxes = true;
+            chartArea7.Name = "ChartArea1";
+            this.dataChart.ChartAreas.Add(chartArea7);
             this.dataChart.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            legend6.Name = "Legend1";
-            this.dataChart.Legends.Add(legend6);
+            legend7.Name = "Legend1";
+            this.dataChart.Legends.Add(legend7);
             this.dataChart.Location = new System.Drawing.Point(12, 12);
             this.dataChart.Name = "dataChart";
             this.dataChart.Size = new System.Drawing.Size(1533, 687);
@@ -87,7 +87,7 @@
             // 
             // btnShowDataFrom
             // 
-            this.btnShowDataFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnShowDataFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnShowDataFrom.Location = new System.Drawing.Point(29, 730);
             this.btnShowDataFrom.Name = "btnShowDataFrom";
             this.btnShowDataFrom.Size = new System.Drawing.Size(147, 110);
