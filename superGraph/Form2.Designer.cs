@@ -37,48 +37,48 @@
             // 
             // txtbxGraphName
             // 
-            this.txtbxGraphName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtbxGraphName.Location = new System.Drawing.Point(252, 33);
+            this.txtbxGraphName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtbxGraphName.Location = new System.Drawing.Point(247, 21);
             this.txtbxGraphName.Name = "txtbxGraphName";
-            this.txtbxGraphName.Size = new System.Drawing.Size(170, 24);
+            this.txtbxGraphName.Size = new System.Drawing.Size(144, 21);
             this.txtbxGraphName.TabIndex = 0;
             this.txtbxGraphName.Text = "Без названия";
             // 
             // lblGraphName
             // 
             this.lblGraphName.AutoSize = true;
-            this.lblGraphName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblGraphName.Location = new System.Drawing.Point(33, 36);
+            this.lblGraphName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblGraphName.Location = new System.Drawing.Point(22, 27);
             this.lblGraphName.Name = "lblGraphName";
-            this.lblGraphName.Size = new System.Drawing.Size(205, 18);
+            this.lblGraphName.Size = new System.Drawing.Size(174, 15);
             this.lblGraphName.TabIndex = 1;
             this.lblGraphName.Text = "Введите название графика: ";
             // 
             // lblChooseChartArea
             // 
             this.lblChooseChartArea.AutoSize = true;
-            this.lblChooseChartArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblChooseChartArea.Location = new System.Drawing.Point(33, 86);
+            this.lblChooseChartArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblChooseChartArea.Location = new System.Drawing.Point(22, 69);
             this.lblChooseChartArea.Name = "lblChooseChartArea";
-            this.lblChooseChartArea.Size = new System.Drawing.Size(228, 18);
+            this.lblChooseChartArea.Size = new System.Drawing.Size(192, 15);
             this.lblChooseChartArea.TabIndex = 2;
             this.lblChooseChartArea.Text = "Выберите область построения:";
             // 
             // cmbbxChartArea
             // 
-            this.cmbbxChartArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmbbxChartArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmbbxChartArea.FormattingEnabled = true;
-            this.cmbbxChartArea.Location = new System.Drawing.Point(348, 78);
+            this.cmbbxChartArea.Location = new System.Drawing.Point(247, 66);
             this.cmbbxChartArea.Name = "cmbbxChartArea";
-            this.cmbbxChartArea.Size = new System.Drawing.Size(74, 26);
+            this.cmbbxChartArea.Size = new System.Drawing.Size(74, 23);
             this.cmbbxChartArea.TabIndex = 3;
             // 
             // btnOk
             // 
-            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnOk.Location = new System.Drawing.Point(179, 146);
+            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnOk.Location = new System.Drawing.Point(162, 117);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(103, 37);
+            this.btnOk.Size = new System.Drawing.Size(80, 30);
             this.btnOk.TabIndex = 4;
             this.btnOk.Text = "Ок";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -88,7 +88,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(489, 210);
+            this.ClientSize = new System.Drawing.Size(420, 169);
             this.ControlBox = false;
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.cmbbxChartArea);
